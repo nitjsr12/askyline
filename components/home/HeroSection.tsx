@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Slot } from '@radix-ui/react-slot';
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Rocket, Users, ArrowUpRight } from "lucide-react";
 import Image from "next/image";
@@ -92,7 +93,7 @@ export function HeroSection() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" asChild>
+              <Button size="lg" >
                 <a
                   href="#contact"
                   className="group relative flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg text-white font-semibold hover:scale-105 transition-transform"
@@ -103,7 +104,7 @@ export function HeroSection() {
                 </a>
               </Button>
 
-              <Button size="lg" variant="outline" asChild>
+              <Button size="lg" variant="outline" >
                 <a
                   href="#portfolio"
                   className="group relative flex items-center justify-center gap-2 px-6 py-3 border border-gray-400 rounded-lg text-gray-300 hover:text-white hover:border-white transition-colors"
