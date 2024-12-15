@@ -7,23 +7,19 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Address",
-    content: "123 Digital Avenue, Tech City, TC 12345",
+    content: "HSR layout,Bengaluru, karnataka 560102",
   },
   {
     icon: Phone,
     title: "Phone",
-    content: "(555) 123-4567",
+    content: "+917256889395",
   },
   {
     icon: Mail,
     title: "Email",
-    content: "contact@askylinedigital.com",
+    content: "info@askylinedigital.com",
   },
-  {
-    icon: Clock,
-    title: "Business Hours",
-    content: "Mon - Fri: 9:00 AM - 6:00 PM",
-  },
+ 
 ];
 
 export function ContactInfo() {

@@ -8,7 +8,7 @@ const services = [
     title: "Custom Web Development",
     description:
       "We build stunning, responsive websites tailored to your business needs using the latest technologies.",
-    image: "/images/web-development.jpg",
+    image: "/images/portfolio-1.jpg",
     details:
       "Our web development services include UI/UX design, front-end and back-end development, and maintenance. We ensure that your website is optimized for performance, scalability, and user engagement.",
   },
@@ -16,7 +16,7 @@ const services = [
     title: "Mobile App Development",
     description:
       "Create intuitive and high-performing mobile applications for iOS and Android platforms.",
-    image: "/images/mobile-app.jpg",
+    image: "/images/portfolio-2.jpg",
     details:
       "Our mobile app development services include native and cross-platform development, app store optimization, and user-friendly interfaces. We transform your vision into functional and engaging mobile solutions.",
   },
@@ -24,7 +24,7 @@ const services = [
     title: "SEO and Digital Marketing",
     description:
       "Boost your online presence and improve your search engine rankings with our expert strategies.",
-    image: "/images/seo.jpg",
+    image: "/images/portfolio-3.jpg",
     details:
       "We offer SEO audits, keyword research, content creation, and link-building strategies to drive organic traffic and conversions.",
   },

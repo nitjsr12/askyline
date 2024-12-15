@@ -41,10 +41,10 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">Contact</h3>
             <ul className="space-y-2 text-sm">
-              <li className="opacity-80 hover:opacity-100 transition-opacity">contact@askylinedigital.com</li>
-              <li className="opacity-80 hover:opacity-100 transition-opacity">(555) 123-4567</li>
-              <li className="opacity-80 hover:opacity-100 transition-opacity">123 Digital Avenue</li>
-              <li className="opacity-80 hover:opacity-100 transition-opacity">Tech City, TC 12345</li>
+              <li className="opacity-80 hover:opacity-100 transition-opacity">info@askylinedigital.com</li>
+              <li className="opacity-80 hover:opacity-100 transition-opacity">+917256889395</li>
+              <li className="opacity-80 hover:opacity-100 transition-opacity">HSR layout</li>
+              <li className="opacity-80 hover:opacity-100 transition-opacity">Bengaluru, karnataka 560102 </li>
             </ul>
           </div>
 
