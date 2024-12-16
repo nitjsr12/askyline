@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const socialLinks = [
   { name: "Twitter", icon: Twitter, href: "#" },
-  { name: "LinkedIn", icon: Linkedin, href: "#" },
+  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/askyline-digital/" },
   { name: "Facebook", icon: Facebook, href: "#" },
   { name: "Instagram", icon: Instagram, href: "#" },
 ];
