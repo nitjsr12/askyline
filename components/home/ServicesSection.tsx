@@ -19,21 +19,7 @@ const services = [
     title: "Data-Driven SEO",
     description: "Strategic SEO solutions to improve your online visibility and rankings.",
   },
-  {
-    icon: MessageSquare,
-    title: "Social Media Marketing",
-    description: "Engaging social campaigns that connect with your target audience.",
-  },
-  {
-    icon: Code,
-    title: "Custom Solutions",
-    description: "Tailored software solutions to meet your specific business needs.",
-  },
-  {
-    icon: Users,
-    title: "CRM & Automation",
-    description: "Streamlined CRM and workflow automation to enhance productivity.",
-  },
+  
 ];
 
 export function ServicesSection() {
