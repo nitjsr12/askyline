@@ -1,23 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SparklesCore } from "./ui/sparkles"; // You'll need to create this component
+// You'll need to create this component
 
 export function AboutHero() {
   return (
     <section className="relative w-full overflow-hidden bg-gray-900 h-[40vh] md:h-[50vh] flex items-center justify-center">
       {/* Animated background elements */}
-      <div className="absolute inset-0 w-full h-full">
-        <SparklesCore
-          id="tsparticles"
-          background="transparent"
-          minSize={0.6}
-          maxSize={1.4}
-          particleDensity={50}
-          className="w-full h-full"
-          particleColor="#FFFFFF"
-        />
-      </div>
       
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/80 to-gray-900" />
