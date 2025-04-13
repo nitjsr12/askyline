@@ -1,12 +1,23 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { Slot } from '@radix-ui/react-slot';
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Rocket, Users, ArrowUpRight } from "lucide-react";
+import { ArrowRight, Rocket, Users, ArrowUpRight, Sparkles, Globe, Code, Smartphone } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 export function HeroSection() {
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, Math.round);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const animation = animate(count, 100, { duration: 3 });
+
+    return animation.stop;
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -21,10 +32,26 @@ export function HeroSection() {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
+    hover: { scale: 1.05 },
+    tap: { scale: 0.95 }
+  };
+
+  const floatingVariants = {
+    float: {
+      y: [0, -15, 0],
+      transition: {
+        duration: 4,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
   };
 
   return (
-    <section className="relative min-h-screen flex items-center bg-gradient-to-b from-gray-900 to-gray-800 text-white overflow-hidden">
+    <section 
+      ref={containerRef}
+      className="relative min-h-screen flex items-center bg-gradient-to-b from-gray-900 to-gray-800 text-white overflow-hidden"
+    >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 -z-10">
         {/* Background Image */}
@@ -34,6 +61,7 @@ export function HeroSection() {
           transition={{ duration: 1 }}
           className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center"
         />
+        
         {/* Glowing Circles */}
         <motion.div
           animate={{
@@ -61,6 +89,33 @@ export function HeroSection() {
         />
       </div>
 
+      {/* Floating Particles */}
+      {[...Array(20)].map((_, i) => (
+        <motion.div
+          key={i}
+          initial={{
+            x: Math.random() * 100 - 50,
+            y: Math.random() * 100 - 50,
+            opacity: 0
+          }}
+          animate={{
+            x: Math.random() * 100 - 50,
+            y: Math.random() * 100 - 50,
+            opacity: [0, 0.5, 0],
+          }}
+          transition={{
+            duration: Math.random() * 10 + 10,
+            repeat: Infinity,
+            repeatType: "reverse"
+          }}
+          className="absolute w-1 h-1 rounded-full bg-purple-400"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+          }}
+        />
+      ))}
+
       {/* Content */}
       <div className="container mx-auto px-6 py-20">
         <motion.div
@@ -71,20 +126,45 @@ export function HeroSection() {
         >
           {/* Left Column */}
           <motion.div variants={itemVariants} className="space-y-8">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 backdrop-blur-sm border border-purple-500/20">
+            <motion.div 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 backdrop-blur-sm border border-purple-500/20 hover:bg-purple-500/20 transition-colors"
+            >
+              <Sparkles className="w-4 h-4 text-purple-400" />
               <span className="text-sm font-medium">Innovative Digital Solutions</span>
               <ArrowRight className="w-4 h-4" />
-            </div>
+            </motion.div>
 
             <h1 className="text-4xl md:text-6xl font-bold leading-tight">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500">
+              <motion.span 
+                className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500"
+                animate={{
+                  backgroundPositionX: ['0%', '100%', '0%'],
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              >
                 Crafting Digital
-              </span>
+              </motion.span>
               <br />
               Solutions that{" "}
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500">
+              <motion.span 
+                className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-purple-500"
+                animate={{
+                  backgroundPositionX: ['100%', '0%', '100%'],
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              >
                 Transform
-              </span>
+              </motion.span>
             </h1>
 
             <p className="text-xl text-gray-300 leading-relaxed max-w-lg">
@@ -93,61 +173,101 @@ export function HeroSection() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <Button size="lg" >
-                <a
-                  href="#contact"
-                  className="group relative flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg text-white font-semibold hover:scale-105 transition-transform"
-                >
-                  <Rocket className="w-5 h-5" />
-                  Get Started
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-              </Button>
+              <motion.div
+                variants={itemVariants}
+                whileHover="hover"
+                whileTap="tap"
+              >
+                <Button size="lg" className="relative overflow-hidden group">
+                  <a
+                    href="#contact"
+                    className="relative z-10 flex items-center justify-center gap-2 px-6 py-3 rounded-lg text-white font-semibold"
+                  >
+                    <Rocket className="w-5 h-5" />
+                    Get Started
+                    <ArrowUpRight className="w-4 h-4" />
+                  </a>
+                  <motion.span 
+                    className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500"
+                    initial={{ opacity: 1 }}
+                    whileHover={{
+                      opacity: 0.9,
+                      background: [
+                        'linear-gradient(to right, #8b5cf6, #3b82f6)',
+                        'linear-gradient(to right, #3b82f6, #8b5cf6)'
+                      ],
+                      transition: { duration: 0.5 }
+                    }}
+                  />
+                  <motion.span 
+                    className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  />
+                </Button>
+              </motion.div>
 
-              <Button size="lg" variant="outline" >
-                <a
-                  href="#portfolio"
-                  className="group relative flex items-center justify-center gap-2 px-6 py-3 border border-gray-400 rounded-lg text-gray-300 hover:text-white hover:border-white transition-colors"
-                >
-                  <Users className="w-5 h-5" />
-                  View Our Work
-                </a>
-              </Button>
+              <motion.div
+                variants={itemVariants}
+                whileHover="hover"
+                whileTap="tap"
+              >
+                <Button size="lg" variant="outline" className="group">
+                  <a
+                    href="#portfolio"
+                    className="flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold"
+                  >
+                    <Users className="w-5 h-5" />
+                    View Our Work
+                  </a>
+                </Button>
+              </motion.div>
             </div>
 
-            <div className="flex items-center gap-8 pt-8">
-              <div className="flex -space-x-4">
-                {[1, 2, 3, 4].map((i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.1 }}
-                    className="w-12 h-12 rounded-full border-2 border-gray-800 bg-purple-500/20 backdrop-blur-sm"
-                  />
-                ))}
-              </div>
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.5 }}
-                className="space-y-1"
+            {/* Stats */}
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 pt-8">
+              <motion.div 
+                className="p-4 rounded-xl bg-gray-800/50 backdrop-blur-sm border border-gray-700"
+                whileHover={{ y: -5 }}
               >
-                <p className="font-semibold">Trusted by 100+ Companies</p>
-                <div className="flex items-center gap-1">
-                  {[1, 2, 3, 4, 5].map((i) => (
-                    <motion.svg
-                      key={i}
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: i * 0.1 }}
-                      className="w-5 h-5 text-yellow-400"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </motion.svg>
-                  ))}
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-purple-500/20">
+                    <Globe className="w-5 h-5 text-purple-400" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold">
+                      +<motion.span>{rounded}</motion.span>
+                    </p>
+                    <p className="text-sm text-gray-400">Projects</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                className="p-4 rounded-xl bg-gray-800/50 backdrop-blur-sm border border-gray-700"
+                whileHover={{ y: -5 }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-blue-500/20">
+                    <Code className="w-5 h-5 text-blue-400" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold">50+</p>
+                    <p className="text-sm text-gray-400">Technologies</p>
+                  </div>
+                </div>
+              </motion.div>
+
+              <motion.div 
+                className="p-4 rounded-xl bg-gray-800/50 backdrop-blur-sm border border-gray-700"
+                whileHover={{ y: -5 }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className="p-2 rounded-lg bg-green-500/20">
+                    <Smartphone className="w-5 h-5 text-green-400" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold">100+</p>
+                    <p className="text-sm text-gray-400">Clients</p>
+                  </div>
                 </div>
               </motion.div>
             </div>
@@ -158,13 +278,13 @@ export function HeroSection() {
             variants={itemVariants}
             className="relative group"
           >
-            <div className="relative z-10 rounded-2xl overflow-hidden shadow-1xl">
-              <motion.div
-                initial={{ scale: 1.2 }}
-                animate={{ scale: 1 }}
-                transition={{ duration: 0.8 }}
-                className="relative aspect-square"
-              >
+            <motion.div
+              variants={floatingVariants}
+              animate="float"
+              className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-2 border-purple-500/30"
+            >
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10 backdrop-blur-sm z-20 pointer-events-none" />
+              <div className="relative aspect-square">
                 <Image
                   src="/images/heroside.gif"
                   alt="Digital Solutions"
@@ -173,8 +293,33 @@ export function HeroSection() {
                   className="object-cover w-full h-full transform transition-transform duration-700 group-hover:scale-110"
                   priority
                 />
-              </motion.div>
-            </div>
+              </div>
+              {/* Floating elements */}
+              <motion.div 
+                className="absolute top-8 left-8 w-16 h-16 rounded-full bg-purple-500/20 backdrop-blur-sm border border-purple-500/30"
+                animate={{
+                  y: [0, -20, 0],
+                  rotate: [0, 360],
+                }}
+                transition={{
+                  duration: 8,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              <motion.div 
+                className="absolute bottom-8 right-8 w-24 h-24 rounded-full bg-blue-500/20 backdrop-blur-sm border border-blue-500/30"
+                animate={{
+                  y: [0, 20, 0],
+                  rotate: [360, 0],
+                }}
+                transition={{
+                  duration: 10,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+            </motion.div>
           </motion.div>
         </motion.div>
       </div>
