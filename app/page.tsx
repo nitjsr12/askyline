@@ -1,19 +1,21 @@
 import { HeroSection } from "@/components/home/HeroSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import  AboutUs  from "@/components/home/AboutUs"
-import { WorkPortfolio } from "@/components/home/ PortfolioSection";
 import { ReviewsSection } from "@/components/home/ReviewsSection";
 import { BlogSection } from "@/components/home/BlogSection";
 import { NewsletterSection } from "@/components/home/NewsletterSection";
+import { WhyChooseUs } from "@/components/about/WhyChooseUs";
+import { CallToAction } from "@/components/services/CallToAction";
 export default function Home() {
   return (
     <main className="min-h-screen">
       <HeroSection />
       <AboutUs/>
       <ServicesSection />
-      <WorkPortfolio/>
+      <WhyChooseUs/>
       <ReviewsSection/>
       <BlogSection/>
+      <CallToAction/>
       <NewsletterSection/>
     </main>
   );

@@ -6,7 +6,7 @@ export default function ContactPage() {
   return (
     <main className="pt-20">
       <ContactHero />
-      <div className="py-20 bg-accent">
+      <div className="py-20 bg-gray-900">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12">
             <ContactForm />

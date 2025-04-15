@@ -120,9 +120,15 @@ export default function AboutUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            We innovate, create, and elevate your digital presence. From tailored
-            web development to robust CRM solutions, our expertise drives your
-            success in the digital realm.
+           We’re a digital marketing and tech agency that’s deeply passionate about building meaningful solutions. Whether it’s clean, well-written code or a strategy backed by data, we approach every project with care and curiosity. We believe the best work comes from listening first, understanding fully, and then crafting something that truly resonates.
+          </motion.p>
+          <motion.p
+            className="text-lg text-gray-300 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+          >
+            At Askyline Digital, we chose our name with intention. It’s about helping our clients rise building their presence, sharpening their edge, and guiding their brand towards where it truly belongs. The top isn’t just a goal, it’s a journey we take together.
           </motion.p>
 
           <motion.p
@@ -131,9 +137,8 @@ export default function AboutUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            With a passion for innovation, we deliver results that transform
-            businesses, ensuring growth and adaptability in the ever-evolving
-            digital landscape.
+            We don’t believe in shortcuts or loud promises. We believe in clarity, consistency, and doing our best work every single time. Every decision we make is driven by purpose. We’re not here to overwhelm you with jargon or sell you something you don’t need. We’re here to understand your business, bring your ideas to life, and grow something real with you.
+
           </motion.p>
 
           {/* Stats Grid */}
@@ -251,7 +256,7 @@ export default function AboutUs() {
             animate="float"
             className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-2 border-purple-500/30"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10 backdrop-blur-sm z-20 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10 z-20 pointer-events-none" />
             <Image
               src="/images/aboutus.png"
               alt="About Us"

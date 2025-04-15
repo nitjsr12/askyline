@@ -1,60 +1,66 @@
 "use client";
 
 import { motion } from "framer-motion";
-// You'll need to create this component
+import Image from "next/image";
 
 export function AboutHero() {
   return (
-    <section className="relative w-full overflow-hidden bg-gray-900 h-[40vh] md:h-[50vh] flex items-center justify-center">
-      {/* Animated background elements */}
-      
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-900/80 to-gray-900" />
+    <section className="relative w-full h-[70vh] min-h-[500px] mt-[-10px] flex items-center justify-center overflow-hidden">
+      {/* Background Image with overlay */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src="/images/about-hero-bg.png" // Replace with your image path
+          alt="Our Team Working"
+          fill
+          className="object-cover"
+          priority
+          quality={100}
+        />
+        <div className="absolute inset-0 " /> {/* Dark overlay */}
+      </div>
 
-      <div className="container relative z-10 px-6 mx-auto text-center">
+      {/* Content */}
+      <div className="container relative z-10 px-6 mx-auto text-center text-white">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ 
-            duration: 0.8,
-            ease: [0.16, 0.77, 0.47, 0.97]
-          }}
-          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto"
         >
           <motion.h1
-            className="text-5xl font-bold md:text-7xl lg:text-8xl bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 pb-2"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
+            className="text-4xl font-bold md:text-5xl lg:text-6xl mb-6"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
           >
-            About Us
+            Our Story
           </motion.h1>
           
           <motion.p
-            className="max-w-3xl mx-auto mt-6 text-xl text-gray-300 md:text-2xl md:mt-8"
+            className="text-lg md:text-xl mb-8 leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            transition={{ delay: 0.4 }}
           >
-            Discover the story behind <span className="font-semibold text-cyan-400">Askylinedigital</span>, our mission, and the talented team that makes it all happen.
+            Founded in 2015, we've grown from a small team of passionate developers to a full-service digital agency helping businesses worldwide transform their ideas into reality.
           </motion.p>
           
           <motion.div
-            className="flex justify-center mt-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            transition={{ delay: 0.6 }}
           >
-            <button className="px-8 py-3 text-sm font-medium transition-all duration-300 transform rounded-full md:px-10 md:py-4 md:text-base bg-gradient-to-r from-blue-500 to-purple-600 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/30">
-              Meet the Team
+            <button className="px-8 py-3 bg-white text-gray-900 font-medium rounded hover:bg-gray-100 transition-colors">
+              Meet Our Team
             </button>
           </motion.div>
         </motion.div>
       </div>
-      
-      {/* Scrolling animation indicator */}
+
+      {/* Scrolling indicator */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white"
         animate={{ y: [0, 10, 0] }}
         transition={{ 
           duration: 2,
@@ -62,8 +68,17 @@ export function AboutHero() {
           ease: "easeInOut"
         }}
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" className="text-gray-400">
-          <path d="M7 10L12 15L17 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <svg 
+          width="24" 
+          height="24" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke="currentColor" 
+          strokeWidth="2" 
+          strokeLinecap="round" 
+          strokeLinejoin="round"
+        >
+          <path d="M7 10L12 15L17 10" />
         </svg>
       </motion.div>
     </section>
