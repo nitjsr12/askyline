@@ -4,10 +4,10 @@ import { Building2, Facebook, Instagram, Linkedin, Twitter } from "lucide-react"
 import Link from "next/link";
 
 const socialLinks = [
-  { name: "Twitter", icon: Twitter, href: "#" },
+  { name: "Twitter", icon: Twitter, href: "https://x.com/AskylineDigital" },
   { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/askyline-digital/" },
-  { name: "Facebook", icon: Facebook, href: "#" },
-  { name: "Instagram", icon: Instagram, href: "#" },
+  { name: "Facebook", icon: Facebook, href: "" },
+  { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/askyline_digital" },
 ];
 
 export function Footer() {
@@ -70,8 +70,8 @@ export function Footer() {
         <div className="mt-8 pt-8 border-t border-gray-700 text-center text-sm">
           <p className="opacity-80">
             &copy; {new Date().getFullYear()} Askylinedigital. All rights reserved. | 
-            <Link href="/privacy" className="hover:opacity-100 transition-opacity mx-1">Privacy Policy</Link> | 
-            <Link href="/terms" className="hover:opacity-100 transition-opacity">Terms of Service</Link>
+            <Link href="#" className="hover:opacity-100 transition-opacity mx-1">Privacy Policy</Link> | 
+            <Link href="#" className="hover:opacity-100 transition-opacity">Terms of Service</Link>
           </p>
         </div>
       </div>

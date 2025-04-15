@@ -10,7 +10,7 @@ const services = [
     icon: Code,
     title: "Custom Web Development",
     description: "We build stunning, responsive websites tailored to your business needs.",
-    image: "images/portfolio-1.jpg",
+    image: "/images/portfolio-1.jpg",
     details: [
       "UI/UX Design with user-centric approach",
       "Front-end (React, Next.js) & Back-end (Node.js, Python)",
@@ -31,7 +31,7 @@ const services = [
     icon: Smartphone,
     title: "Mobile App Development",
     description: "Create intuitive and high-performing mobile applications.",
-    image: "images/portfolio-2.jpg",
+    image: "/images/portfolio-2.jpg",
     details: [
       "Native iOS & Android development",
       "Cross-platform solutions (React Native, Flutter)",
@@ -52,7 +52,7 @@ const services = [
     icon: Search,
     title: "SEO & Digital Marketing",
     description: "Boost your online presence and improve search rankings.",
-    image: "images/portfolio-3.jpg",
+    image: "/images/portfolio-3.jpg",
     details: [
       "Comprehensive SEO audits",
       "Keyword research & strategy",
