@@ -6,9 +6,10 @@ import nodemailer from 'nodemailer';
 export async function POST(request: Request) {
   const formData = await request.json();
 
-  // Create a transporter
   const transporter = nodemailer.createTransport({
-    service: 'gmail', // or your email service
+    host: 'smtp.hostinger.com',
+    port: 465,
+    secure: true,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASSWORD,
@@ -16,7 +17,6 @@ export async function POST(request: Request) {
   });
 
   try {
-    // Email to you (the business)
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
@@ -34,7 +34,6 @@ export async function POST(request: Request) {
       `,
     });
 
-    // Thank you email to the user
     await transporter.sendMail({
       from: process.env.EMAIL_USER,
       to: formData.email,
@@ -43,7 +42,6 @@ export async function POST(request: Request) {
         <h2>Thank You for Your Inquiry!</h2>
         <p>Dear ${formData.name},</p>
         <p>We've received your message and our team will get back to you within 24-48 hours.</p>
-        <p>Here's a summary of your submission:</p>
         <ul>
           <li><strong>Name:</strong> ${formData.name}</li>
           <li><strong>Business:</strong> ${formData.business || 'Not provided'}</li>
