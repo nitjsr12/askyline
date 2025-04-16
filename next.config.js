@@ -4,13 +4,13 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  images: { unoptimized: true },
-};
-
-module.exports = nextConfig;
-module.exports = {
-  // ... existing config
+  images: {
+    unoptimized: true, // disable image optimization
+    domains: ['askylinedigital.online'], // still required in some edge cases
+  },
   experimental: {
     serverActions: true,
   },
-}
+};
+
+module.exports = nextConfig;
