@@ -69,7 +69,7 @@ export function WhyChooseUs() {
             Why Work With Us
           </h2>
           <p className="text-gray-300 text-lg">
-            We don't overpromise. We simply stay committed to doing the work right — with intention, clarity, and care. Here's how we approach every project:
+            We don&apos;t overpromise. We simply stay committed to doing the work right — with intention, clarity, and care. Here&apos;s how we approach every project:
           </p>
         </motion.div>
 

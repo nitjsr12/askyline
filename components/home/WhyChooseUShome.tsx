@@ -87,7 +87,7 @@ export function WhyChooseUsHome() {
             variants={item}
             className="text-xl text-gray-600 mb-12"
           >
-            We don't overpromise. We stay committed to doing the work right—with intention, clarity, and care.
+            We don&apos;t overpromise. We stay committed to doing the work right—with intention, clarity, and care.
           </motion.p>
 
           <motion.div 

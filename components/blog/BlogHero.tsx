@@ -34,7 +34,7 @@ export function BlogHero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-           Our Blog
+           Our Blogs
           </motion.h1>
           
           <motion.p

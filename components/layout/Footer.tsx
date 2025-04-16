@@ -7,7 +7,7 @@ const socialLinks = [
   { name: "Twitter", icon: Twitter, href: "https://x.com/AskylineDigital" },
   { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/company/askyline-digital/" },
   { name: "Facebook", icon: Facebook, href: "" },
-  { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/askyline_digital" },
+  { name: "Instagram", icon: Instagram, href: " https://www.instagram.com/askyline_digital" },
 ];
 
 export function Footer() {
@@ -22,7 +22,7 @@ export function Footer() {
               <span>Askylinedigital</span>
             </Link>
             <p className="opacity-80 text-sm">
-              Elevating businesses through innovative digital solutions and strategic growth. Let's build the future together.
+              Elevating businesses through innovative digital solutions and strategic growth. Let&apos;s build the future together.
             </p>
           </div>
 

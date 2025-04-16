@@ -48,7 +48,7 @@ export function ContactInfo() {
           Contact <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">Information</span>
         </h2>
         <p className="text-gray-400">
-          Get in touch with us through any of these channels. We're here to help!
+          Get in touch with us through any of these channels. We&apos;re here to help!
         </p>
       </div>
 

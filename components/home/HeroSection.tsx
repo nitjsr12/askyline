@@ -34,7 +34,7 @@ export function HeroSection() {
             </h1>
 
             <p className="text-xl text-gray-300 leading-relaxed max-w-lg">
-            Askyline  Digital is your trusted partner for Digital Solutions and Digital Marketing. We provide Web and App Development, SEO, Digital Marketing, and CRM solutions that actually solve problems, not just look good. We're not just another agency, we are all about clarity, clean builds, and doing things the right way.
+            Askyline  Digital is your trusted partner for Digital Solutions and Digital Marketing. We provide Web and App Development, SEO, Digital Marketing, and CRM solutions that actually solve problems, not just look good. We&apos;re not just another agency, we are all about clarity, clean builds, and doing things the right way.
             </p>
 
             <div className="flex flex-wrap gap-4">

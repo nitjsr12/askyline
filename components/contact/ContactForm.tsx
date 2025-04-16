@@ -81,7 +81,7 @@ export function ContactForm() {
         <CheckCircle className="w-16 h-16 text-green-400 mx-auto mb-4" />
         <h3 className="text-2xl font-bold text-white mb-2">Thank You!</h3>
         <p className="text-gray-300 mb-6">
-          Your message has been sent successfully. We'll get back to you soon.
+          Your message has been sent successfully. We&apos;ll get back to you soon.
         </p>
         <p className="text-gray-400">
           A confirmation email has been sent to your inbox.
@@ -99,7 +99,7 @@ export function ContactForm() {
       className="bg-gray-800 p-8 rounded-xl border border-gray-700 shadow-xl"
     >
       <h2 className="text-2xl font-bold text-white mb-2">Get in Touch</h2>
-      <p className="text-gray-400 mb-6">Fill out the form below and we'll respond promptly</p>
+      <p className="text-gray-400 mb-6">Fill out the form below and we&apos;ll respond promptly</p>
       
       {submitError && (
         <div className="mb-4 p-3 bg-red-900/50 border border-red-700 rounded-lg text-red-200">

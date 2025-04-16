@@ -53,7 +53,7 @@ export function CallToAction() {
             transition={{ delay: 0.2 }}
           >
             <Phone className="w-5 h-5 text-blue-400" />
-            <span className="text-sm font-medium text-gray-300">Let's Connect</span>
+            <span className="text-sm font-medium text-gray-300">Let&apos;s Connect</span>
           </motion.div>
 
           <motion.h2
@@ -115,8 +115,8 @@ export function CallToAction() {
         transition={{ delay: 1.2 }}
       >
         <span>Or call us directly: </span>
-        <a href="tel:+1234567890" className="text-blue-400 hover:text-blue-300 transition-colors">
-          +1 (234) 567-890
+        <a href="tel:+918918567430" className="text-blue-400 hover:text-blue-300 transition-colors">
+          +91 89185 67430
         </a>
       </motion.div>
     </section>

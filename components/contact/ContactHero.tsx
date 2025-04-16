@@ -43,7 +43,7 @@ export function ContactHero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            Have a project in mind? Let's discuss how we can help you achieve your goals.
+            Have a project in mind? Let&apos;s discuss how we can help you achieve your goals.
           </motion.p>
           
           <motion.div

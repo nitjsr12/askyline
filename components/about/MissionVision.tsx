@@ -65,10 +65,9 @@ export function MissionVision() {
               
               <p className="text-gray-300 leading-relaxed">
                 To empower businesses with innovative digital solutions that drive growth,
-                enhance efficiency, and create lasting value. We're committed to delivering
+                enhance efficiency, and create lasting value. We are committed to delivering
                 excellence through cutting-edge technology and strategic thinking.
               </p>
-              
               <motion.div
                 whileHover={{ x: 5 }}
                 className="inline-flex items-center text-blue-400 font-medium mt-4"
@@ -105,9 +104,8 @@ export function MissionVision() {
               <p className="text-gray-300 leading-relaxed">
                 To be the leading force in digital transformation, recognized globally
                 for our innovative solutions, exceptional service, and the measurable
-                success we bring to our clients' businesses.
+                success we bring to our clients businesses.
               </p>
-              
               <motion.div
                 whileHover={{ x: 5 }}
                 className="inline-flex items-center text-purple-400 font-medium mt-4"
