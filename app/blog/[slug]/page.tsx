@@ -75,9 +75,8 @@ export default async function BlogPostPage({ params }: PageParams) {
   // Properly await the params before using
   const { slug } = await Promise.resolve(params);
   const post = await getPostBySlug(slug);
-  const latestPosts = await getLatestPosts(3);
-  const categories = await getCategories();
-
+  const latestPosts: Post[] = await getLatestPosts(3);
+  const categories: Category[] = await getCategories();
   const featuredImage = post._embedded['wp:featuredmedia']?.[0]?.source_url || '/default-banner.jpg';
   const wordCount = post.content.rendered.split(/\s+/).length;
   const readingTime = Math.ceil(wordCount / 200);
@@ -223,8 +222,8 @@ export default async function BlogPostPage({ params }: PageParams) {
 }
 
 export async function generateStaticParams() {
-  const posts = await getPosts();
-  return posts.map((post) => ({ 
+  const posts: Post[] = await getPosts();
+  return posts.map((post: Post) => ({ 
     slug: post.slug 
   }));
 }
