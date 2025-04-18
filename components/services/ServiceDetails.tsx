@@ -8,64 +8,65 @@ import { useState } from "react";
 const services = [
   {
     icon: Code,
-    title: "Custom Web Development",
-    description: "We build stunning, responsive websites tailored to your business needs.",
+    title: "Web Development",
+    description: "Your website is one of your most valuable business assets. At Askyline Digital, we create high-performing, custom websites that are designed to reflect your brand and support your goals. From initial design to final deployment, every part of your site is built to deliver a smooth, responsive experience across all devices. Whether you’re launching a new product, scaling your services, or upgrading an outdated platform, we provide the strategy, design, and development expertise to bring it all together.",
     image: "/images/portfolio-1.jpg",
     details: [
-      "UI/UX Design with user-centric approach",
-      "Front-end (React, Next.js) & Back-end (Node.js, Python)",
-      "E-commerce solutions (Shopify, WooCommerce)",
-      "Performance optimization & SEO-ready structure",
-      "Ongoing maintenance & support"
+      "User-focused UI and UX design",
+      "Front-end development with React and Next.js",
+      "Scalable back-end solutions using Node.js and Python",
+      "E-commerce development with Shopify or WooCommerce",
+      "SEO-ready architecture and performance optimization",
+      "Ongoing website maintenance and technical support"
     ],
     features: [
-      "Mobile-first responsive design",
-      "CMS integration options",
-      "API development & integration",
-      "Progressive Web Apps",
-      "Web accessibility compliance"
+      "Mobile-first, fully responsive design",
+      "CMS integration for easy content management",
+      "Custom API development and third-party integration",
+      "Progressive Web App capabilities",
+      "Web accessibility standards compliance"
     ],
     color: "from-purple-500 to-indigo-500"
   },
   {
     icon: Smartphone,
     title: "Mobile App Development",
-    description: "Create intuitive and high-performing mobile applications.",
+    description: "At Askyline Digital, we design and develop mobile applications that deliver real value to users and measurable results for businesses. Whether you need a native ios or Android app or a cross-platform solution, we focus on building clean, intuitive mobile experiences that are optimized for performance, usability, and long-term success. From MVPS to full-featured enterprise apps, our process is guided by clear communication, strategic planning, and technical excellence.",
     image: "/images/portfolio-2.jpg",
     details: [
-      "Native iOS & Android development",
-      "Cross-platform solutions (React Native, Flutter)",
-      "App store optimization & deployment",
-      "Push notification integration",
-      "Biometric authentication"
+      "Native ios and Android app development",
+      "Cross-platform development using React Native and Flutter",
+      "App Store and Play Store deployment and optimization",
+      "Integration of push notifications and real-time updates",
+      "Secure authentication, including biometric login"
     ],
     features: [
-      "Offline functionality",
-      "In-app purchases",
-      "Social media integration",
-      "Analytics & crash reporting",
-      "Enterprise app security"
+      "Offline access and data sync",
+      "In-app purchases and payment integration",
+      "Social media login and sharing",
+      "Real-time analytics and crash reporting",
+      "Enterprise-grade security and compliance"
     ],
     color: "from-blue-500 to-cyan-500"
   },
   {
     icon: Search,
-    title: "SEO & Digital Marketing",
-    description: "Boost your online presence and improve search rankings.",
+    title: "SEO and Digital Marketing",
+    description: "At Askyline Digital, we help businesses improve their online presence through data-driven SEO and digital marketing strategies. Our approach is rooted in analysis, not guesswork. We evaluate where your brand stands today, identify growth opportunities, and execute targeted strategies that improve rankings, drive traffic, and increase conversions. Whether you're looking to build long-term organic visibility or run high-performing paid campaigns, we provide a complete solution to help you compete effectively in the digital space.",
     image: "/images/portfolio-3.jpg",
     details: [
-      "Comprehensive SEO audits",
-      "Keyword research & strategy",
-      "Technical SEO optimization",
-      "Content marketing & link building",
-      "Local SEO & Google My Business"
+      "Comprehensive SEO audits and site analysis",
+      "Keyword research and content strategy",
+      "Technical SEO improvements",
+      "Link building and content marketing",
+      "Local SEO and Google Business profile optimization"
     ],
     features: [
-      "Competitor analysis",
+      "Competitor benchmarking and reporting",
       "Conversion rate optimization",
-      "PPC campaign management",
-      "Social media marketing",
-      "Monthly performance reporting"
+      "Paid search and PPC campaign management",
+      "Social media marketing strategy and execution",
+      "Monthly performance reports and insights"
     ],
     color: "from-green-500 to-teal-500"
   }
