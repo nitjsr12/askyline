@@ -118,35 +118,6 @@ export function OurProcess() {
             })}
           </div>
         </div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-20 text-center"
-        >
-          <h3 className="text-2xl font-semibold text-white mb-6">
-            Ready to start your project?
-          </h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold shadow-lg hover:shadow-xl transition-all"
-            >
-              Get Started Today
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 rounded-lg bg-gray-800 border border-gray-700 text-white font-semibold shadow-lg hover:shadow-xl hover:bg-gray-700 transition-all"
-            >
-              View Case Studies
-            </motion.button>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

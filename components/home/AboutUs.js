@@ -11,7 +11,7 @@ export default function AboutUs() {
   const rounded = useTransform(count, Math.round);
 
   useEffect(() => {
-    const animation = animate(count, 100, { duration: 3 });
+    const animation = animate(count, 50, { duration: 3 });
     return animation.stop;
   }, []);
 
@@ -120,7 +120,7 @@ export default function AboutUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-           We’re a digital marketing and tech agency that’s deeply passionate about building meaningful solutions. Whether it’s clean, well-written code or a strategy backed by data, we approach every project with care and curiosity. We believe the best work comes from listening first, understanding fully, and then crafting something that truly resonates.
+           We're a digital marketing and tech agency that's deeply passionate about building meaningful solutions. Whether it's clean, well-written code or a strategy backed by data, we approach every project with care and curiosity. We believe the best work comes from listening first, understanding fully, and then crafting something that truly resonates.
           </motion.p>
           <motion.p
             className="text-lg text-gray-300 leading-relaxed"
@@ -128,7 +128,7 @@ export default function AboutUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            At Askyline Digital, we chose our name with intention. It’s about helping our clients rise building their presence, sharpening their edge, and guiding their brand towards where it truly belongs. The top isn’t just a goal, it’s a journey we take together.
+            At Askyline Digital, we chose our name with intention. It's about helping our clients rise building their presence, sharpening their edge, and guiding their brand towards where it truly belongs. The top isn't just a goal, it's a journey we take together.
           </motion.p>
 
           <motion.p
@@ -137,8 +137,7 @@ export default function AboutUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            We don’t believe in shortcuts or loud promises. We believe in clarity, consistency, and doing our best work every single time. Every decision we make is driven by purpose. We’re not here to overwhelm you with jargon or sell you something you don’t need. We’re here to understand your business, bring your ideas to life, and grow something real with you.
-
+            We don't believe in shortcuts or loud promises. We believe in clarity, consistency, and doing our best work every single time. Every decision we make is driven by purpose. We're not here to overwhelm you with jargon or sell you something you don't need. We're here to understand your business, bring your ideas to life, and grow something real with you.
           </motion.p>
 
           {/* Stats Grid */}
@@ -158,7 +157,7 @@ export default function AboutUs() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold">
-                    +<motion.span>{rounded}</motion.span>
+                    <motion.span>{rounded}</motion.span>+
                   </p>
                   <p className="text-sm text-gray-400">Clients</p>
                 </div>
@@ -174,7 +173,7 @@ export default function AboutUs() {
                   <Code className="w-5 h-5 text-blue-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">50+</p>
+                  <p className="text-2xl font-bold">60+</p>
                   <p className="text-sm text-gray-400">Projects</p>
                 </div>
               </div>
@@ -189,8 +188,8 @@ export default function AboutUs() {
                   <Globe className="w-5 h-5 text-green-400" />
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">10+</p>
-                  <p className="text-sm text-gray-400">Countries</p>
+                  <p className="text-2xl font-bold">6+</p>
+                  <p className="text-sm text-gray-400">Experience</p>
                 </div>
               </div>
             </motion.div>
@@ -205,9 +204,8 @@ export default function AboutUs() {
             <Button
               size="lg"
               className="group relative overflow-hidden"
-              asChild
             >
-              <a href="#services">
+              <a href="/services">
                 <span className="relative z-10 flex items-center gap-2">
                   <Rocket className="w-4 h-4 transition-transform group-hover:rotate-12" />
                   Explore Services
@@ -231,9 +229,8 @@ export default function AboutUs() {
               variant="outline"
               size="lg"
               className="group relative overflow-hidden hover:bg-gray-800/50"
-              asChild
             >
-              <a href="#contact">
+              <a href="/contact">
                 <span className="relative z-10 flex items-center gap-2">
                   <MessageCircle className="w-4 h-4 transition-transform group-hover:rotate-12" />
                   Get in Touch

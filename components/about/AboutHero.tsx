@@ -50,9 +50,6 @@ export function AboutHero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            <button className="px-8 py-3 bg-white text-gray-900 font-medium rounded hover:bg-gray-100 transition-colors">
-              Meet Our Team
-            </button>
           </motion.div>
         </motion.div>
       </div>
