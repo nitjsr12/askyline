@@ -30,10 +30,10 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li><Link href="#services" className="opacity-80 hover:opacity-100 transition-opacity">Services</Link></li>
-              <li><Link href="#portfolio" className="opacity-80 hover:opacity-100 transition-opacity">Portfolio</Link></li>
-              <li><Link href="#about" className="opacity-80 hover:opacity-100 transition-opacity">About Us</Link></li>
-              <li><Link href="#blog" className="opacity-80 hover:opacity-100 transition-opacity">Blog</Link></li>
+              <li><Link href="/" className="opacity-80 hover:opacity-100 transition-opacity">Home</Link></li>
+              <li><Link href="/services" className="opacity-80 hover:opacity-100 transition-opacity">Services</Link></li>
+              <li><Link href="/about" className="opacity-80 hover:opacity-100 transition-opacity">About Us</Link></li>
+              <li><Link href="/blog" className="opacity-80 hover:opacity-100 transition-opacity">Blog</Link></li>
             </ul>
           </div>
 
@@ -41,10 +41,10 @@ export function Footer() {
           <div>
             <h3 className="text-lg font-semibold text-white mb-4">Contact</h3>
             <ul className="space-y-2 text-sm">
-              <li className="opacity-80 hover:opacity-100 transition-opacity">info@askylinedigital.com</li>
-              <li className="opacity-80 hover:opacity-100 transition-opacity">+917256889395</li>
+              <li className="opacity-80 hover:opacity-100 transition-opacity"><a  href="mailto:contact@askylinedigital.com">info@askylinedigital.com</a></li>
+              <li className="opacity-80 hover:opacity-100 transition-opacity"> <a href="tel:+918918567430">+918918567430 </a></li>
               <li className="opacity-80 hover:opacity-100 transition-opacity">HSR layout</li>
-              <li className="opacity-80 hover:opacity-100 transition-opacity">Bengaluru, karnataka 560102 </li>
+              <li className="opacity-80 hover:opacity-100 transition-opacity">Bengaluru, Karnataka 560102 </li>
             </ul>
           </div>
 
@@ -69,10 +69,7 @@ export function Footer() {
         {/* Footer Bottom */}
         <div className="mt-8 pt-8 border-t border-gray-700 text-center text-sm">
           <p className="opacity-80">
-            &copy; {new Date().getFullYear()} Askylinedigital. All rights reserved. | 
-            <Link href="#" className="hover:opacity-100 transition-opacity mx-1">Privacy Policy</Link> | 
-            <Link href="#" className="hover:opacity-100 transition-opacity">Terms of Service</Link>
-          </p>
+            &copy; {new Date().getFullYear()} Askylinedigital. All rights reserved.          </p>
         </div>
       </div>
     </footer>

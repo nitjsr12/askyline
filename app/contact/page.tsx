@@ -1,6 +1,7 @@
 import { ContactForm } from "@/components/contact/ContactForm";
 import { ContactHero } from "@/components/contact/ContactHero";
 import { ContactInfo } from "@/components/contact/ContactInfo";
+import { FAQS } from "@/components/contact/FaqSection";
 
 export default function ContactPage() {
   return (
@@ -11,9 +12,11 @@ export default function ContactPage() {
           <div className="grid md:grid-cols-2 gap-12">
             <ContactForm />
             <ContactInfo />
+           
           </div>
         </div>
       </div>
+      <FAQS/>
     </main>
   );
 }

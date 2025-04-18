@@ -42,5 +42,3 @@ export async function getCategories() {
     return await res.json();
   }
   
-  
-  
