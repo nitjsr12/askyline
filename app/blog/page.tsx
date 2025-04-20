@@ -1,18 +1,25 @@
-import { getPosts } from "@/lib/wordpress";
-import { BlogGrid } from "@/components/blog/BlogGrid";
+import { getPosts } from '@/lib/wordpress';
+import { BlogGrid } from '@/components/blog/BlogGrid';
+import { BlogHero } from '@/components/blog/BlogHero';
 
 export default async function BlogPage() {
-  const wpPosts = await getPosts();
-
-  const posts = wpPosts.map((post: any) => ({
+  const posts = await getPosts();
+  
+  // Transform WordPress data to match your component's expected format
+  const formattedPosts = posts.map((post: any) => ({
     title: post.title.rendered,
-    excerpt: post.excerpt.rendered.replace(/<[^>]+>/g, ''), // strip HTML
+    excerpt: post.excerpt.rendered.replace(/<[^>]*>?/gm, '').substring(0, 150) + '...',
     date: post.date,
-    category: post._embedded['wp:term']?.[0]?.[0]?.name || 'General',
-    image: post._embedded['wp:featuredmedia']?.[0]?.source_url || '/fallback.jpg',
+    category: post._embedded['wp:term'][0][0]?.name || 'Uncategorized',
+    image: post._embedded['wp:featuredmedia']?.[0]?.source_url || '/default-blog-image.jpg',
     slug: post.slug,
-    readTime: Math.ceil(post.content.rendered.split(' ').length / 200), // 200 wpm read time
+    readTime: Math.ceil(post.content.rendered.split(' ').length / 200) // ~200 words per minute
   }));
 
-  return <BlogGrid posts={posts} />;
+  return (
+    <main>
+      <BlogHero/>
+      <BlogGrid posts={formattedPosts} />
+    </main>
+  );
 }

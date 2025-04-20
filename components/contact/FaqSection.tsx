@@ -31,9 +31,12 @@ const FAQAccordion = ({
           </h3>
           <div className="space-y-4">
             {section.items.map((item, itemIndex) => {
-              const globalIndex = section.items
-                .slice(0, itemIndex)
-                .reduce((acc, _, i) => acc + (activeIndex === i ? 1 : 0), sectionIndex);
+              // Corrected globalIndex logic
+              const globalIndex =
+                sections
+                  .slice(0, sectionIndex)
+                  .reduce((acc, sec) => acc + sec.items.length, 0) + itemIndex;
+
               const isActive = activeIndex === globalIndex;
 
               return (
@@ -48,7 +51,6 @@ const FAQAccordion = ({
                   <motion.button
                     onClick={() => setActiveIndex(isActive ? null : globalIndex)}
                     className="w-full flex justify-between items-center p-6 text-left hover:bg-gray-700/20 transition-colors"
-                    whileHover={{ backgroundColor: 'rgba(55, 65, 81, 0.2)' }}
                     whileTap={{ scale: 0.98 }}
                   >
                     <h4 className="text-lg font-medium text-gray-100 md:text-xl">
@@ -58,7 +60,7 @@ const FAQAccordion = ({
                       animate={{ rotate: isActive ? 180 : 0 }}
                       className="ml-4 text-gray-400"
                     >
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                         <path d="M6 9L12 15L18 9" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </motion.span>
@@ -195,13 +197,13 @@ export function FAQS() {
 
   return (
     <section id="faq" className="py-24 bg-gradient-to-b from-gray-900 to-gray-800 text-white relative overflow-hidden">
-      {/* Decorative elements */}
+      {/* Decorative blobs */}
       <div className="absolute top-0 left-0 w-full h-full opacity-20">
         <div className="absolute top-20 left-10 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
         <div className="absolute top-0 right-20 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
         <div className="absolute bottom-20 left-1/2 w-64 h-64 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
       </div>
-      
+
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -213,7 +215,7 @@ export function FAQS() {
           <h2 className="font-heading text-4xl md:text-5xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
             Frequently Asked Questions
           </h2>
-          
+
           <p className="text-center text-gray-300 mb-12 max-w-2xl mx-auto text-lg">
             Everything you need to know about working with Askyline Digital. Can't find an answer? Reach out anytime.
           </p>

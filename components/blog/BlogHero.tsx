@@ -64,7 +64,8 @@ export function BlogHero() {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-      >
+      > 
+      <a href="#blog" className="flex flex-col items-center">
         <svg 
           width="24" 
           height="24" 
@@ -77,6 +78,7 @@ export function BlogHero() {
         >
           <path d="M7 10L12 15L17 10" />
         </svg>
+        </a>
       </motion.div>
     </section>
   );

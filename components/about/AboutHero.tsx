@@ -64,6 +64,7 @@ export function AboutHero() {
           ease: "easeInOut"
         }}
       >
+        <a href="#about" className="text-white">
         <svg 
           width="24" 
           height="24" 
@@ -76,6 +77,7 @@ export function AboutHero() {
         >
           <path d="M7 10L12 15L17 10" />
         </svg>
+        </a>
       </motion.div>
     </section>
   );

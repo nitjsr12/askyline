@@ -1,4 +1,4 @@
-const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://yourdomain.com/wp-json';
+const WORDPRESS_API_URL = process.env.WORDPRESS_API_URL || 'https://askylinedigital.online/wp-json';
 
 
 export async function getPosts() {
@@ -41,4 +41,3 @@ export async function getCategories() {
     }
     return await res.json();
   }
-  

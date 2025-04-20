@@ -78,7 +78,7 @@ export function ServiceDetails() {
   return (
     <section className="relative py-24 bg-gray-900 overflow-hidden">
       {/* Background elements */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-10" id="services">
         <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-gray-800 to-transparent opacity-50" />
         <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-gray-800 to-transparent opacity-50" />
         

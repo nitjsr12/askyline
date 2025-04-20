@@ -21,10 +21,10 @@ interface BlogGridProps {
 
 export function BlogGrid({ posts }: BlogGridProps) {
   return (
-    <section className="relative py-24 bg-gray-900 overflow-hidden">
+    <section className="relative py-24 bg-gray-900 overflow-hidden" >
       {/* Background elements (keep your existing background code) */}
       
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6" id="blog">
         {/* Section header (keep your existing header code) */}
 
         {/* Updated Blog posts grid */}
@@ -94,25 +94,6 @@ export function BlogGrid({ posts }: BlogGridProps) {
             </motion.article>
           ))}
         </div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-16 text-center"
-        >
-          <motion.a
-            href="/blog"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold shadow-lg hover:shadow-xl transition-all"
-          >
-            <span>View All Articles</span>
-            <ArrowRight className="w-5 h-5" />
-          </motion.a>
-        </motion.div>
       </div>
     </section>
   );

@@ -33,7 +33,7 @@ export function Footer() {
               <li><Link href="/" className="opacity-80 hover:opacity-100 transition-opacity">Home</Link></li>
               <li><Link href="/services" className="opacity-80 hover:opacity-100 transition-opacity">Services</Link></li>
               <li><Link href="/about" className="opacity-80 hover:opacity-100 transition-opacity">About Us</Link></li>
-              <li><Link href="/blog" className="opacity-80 hover:opacity-100 transition-opacity">Blog</Link></li>
+              <li><Link href="/blog" className="opacity-80 hover:opacity-100 transition-opacity">Blogs</Link></li>
             </ul>
           </div>
 
