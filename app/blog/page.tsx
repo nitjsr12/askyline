@@ -2,6 +2,19 @@ import { getPosts } from '@/lib/wordpress';
 import { BlogGrid } from '@/components/blog/BlogGrid';
 import { BlogHero } from '@/components/blog/BlogHero';
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Latest Blogs - Askylinedigital',
+  description: 'Explore the latest blogs and articles on digital transformation, technology solutions, and more.',
+  keywords: 'blogs, articles, digital transformation, technology solutions, latest news, insights, industry trends',
+  openGraph: {
+    title: 'Latest Blogs - Askylinedigital',
+    description: 'Explore the latest blogs and articles on digital transformation, technology solutions, and more.',
+    url: 'https://askylinedigital.com/blog',
+    siteName: 'Askylinedigital',
+  }
+};
 export default async function BlogPage() {
   const posts = await getPosts();
   

@@ -102,7 +102,7 @@ export const SEOPage = () => {
             fill
             className="object-cover opacity-20"
           />
-          <div className="absolute inset-0 " />
+          <div className="absolute inset-0 bg-gradient-to-b from-green-900/30 to-gray-950" />
         </div>
         
         <div className="container mx-auto px-4 text-center">
