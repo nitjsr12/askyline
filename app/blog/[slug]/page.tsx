@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 import styles from './postContent.module.css';
 import SocialShare from '@/components/blog/SocialShare';
 import { Metadata } from 'next';
+import Comments from '@/components/Comments';
 
 // Type declarations
 interface Post {
@@ -217,6 +218,7 @@ export default async function BlogPostPage({ params }: PageParams) {
           </div>
         </div>
       </div>
+      <Comments postId={post.id} />
     </article>
   );
 }

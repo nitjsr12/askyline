@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Calendar, Clock, ArrowRight, BookOpen } from "lucide-react";
 import Link from 'next/link';
 
+
 interface BlogPost {
   title: string;
   excerpt: string;

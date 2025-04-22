@@ -5,6 +5,7 @@ import { NewsletterSection } from "@/components/home/NewsletterSection";
 import { WhyChooseUs } from "@/components/about/WhyChooseUs";
 import { CallToAction } from "@/components/services/CallToAction";
 import { FAQSection } from "@/components/home/FAQSection";
+import { PortfolioGrid } from "@/components/portfolio/PortfolioGrid";
 export default function Home() {
   return (
     <main className="min-h-screen">
@@ -12,6 +13,7 @@ export default function Home() {
       <AboutUs/>
       <ServicesSection />
       <WhyChooseUs/>
+      <PortfolioGrid/>
       <FAQSection/>
       <CallToAction/>
       <NewsletterSection/>
