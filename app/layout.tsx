@@ -4,6 +4,8 @@ import { Poppins, Open_Sans } from 'next/font/google';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Analytics } from '@vercel/analytics/next';
+import { GA_TRACKING_ID } from '@/lib/gtag';
+import Script from 'next/script';
 
 const poppins = Poppins({ 
   subsets: ['latin'],
@@ -35,6 +37,28 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        {/* Google Tag Script */}
+        <Script
+          strategy="afterInteractive"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              window.gtag = gtag;
+              gtag('js', new Date());
+              gtag('config', '${GA_TRACKING_ID}', {
+                page_path: window.location.pathname,
+              });
+            `,
+          }}
+        />
+      </head>
       <body className={`${poppins.variable} ${openSans.variable} font-body`}>
         <Header />
         {children}
