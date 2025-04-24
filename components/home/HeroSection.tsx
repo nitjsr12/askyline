@@ -25,16 +25,17 @@ export function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Column */}
           <div className="space-y-8">
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight">
+            <h1 className="text-4xl md:text-5xl font-bold leading-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-blue-400">
-                Modern Digital
+              Empowering Brands 
               </span>
               <br />
-              Solutions for Your Business
+              with Digital Solutions
             </h1>
 
             <p className="text-xl text-gray-300 leading-relaxed max-w-lg">
-            Askyline  Digital is your trusted partner for Digital Solutions and Digital Marketing. We provide Web and App Development, SEO, Digital Marketing, and CRM solutions that actually solve problems, not just look good. We&apos; re not just another agency, we are all about clarity, clean builds, and doing things the right way.
+            We are a tech-based digital marketing agency in India, specialized in helping startups and growing businesses scale with tailored web development, mobile app solutions, and digital marketing strategies. Grounded in our vision, we&apos;re here to lift your brand to the top of the skyline.
+
             </p>
             <motion.div
             className="flex flex-wrap gap-4 pt-4"
@@ -48,7 +49,7 @@ export function HeroSection() {
                 className="relative z-10 flex items-center gap-2"
               >
                 <Rocket className="w-4 h-4 transition-transform group-hover:rotate-12" />
-                Explore Services
+                Explore Our Services 
               </Button>
               <motion.span 
                 className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500"
@@ -84,16 +85,16 @@ export function HeroSection() {
 
           {/* Right Column */}
           <div className="relative">
-            <div className="relative rounded-xl overflow-hidden aspect-square">
+            <div className="relative rounded-xl overflow-hidden ">
               <Image
-                src="/images/heroside.gif"
+                src="/images/heroside (1).gif"
                 alt="Digital Solutions"
-                width={600}
-                height={600}
+                width={500}
+                height={500}
                 className="object-cover w-full h-full"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-blue-500/10" />
+              <div className="absolute inset-0 " />
             </div>
           </div>
         </div>

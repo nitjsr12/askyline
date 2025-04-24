@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
-import { Rocket, MessageCircle, Sparkles, Users, Code, Globe } from "lucide-react";
+import { Rocket, MessageCircle, Sparkles, Users, Code, Globe, Workflow } from "lucide-react";
 import { useEffect } from "react";
 
 export default function AboutUs() {
@@ -104,13 +104,13 @@ export default function AboutUs() {
           </motion.div>
 
           <motion.h1
-            className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight"
+            className="text-4xl md:text-5xl lg:text-5xl font-bold tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500">
-              About Askylinedigital
+            Who We Are
             </span>
           </motion.h1>
 
@@ -120,7 +120,7 @@ export default function AboutUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-           We're a digital marketing and tech agency that's deeply passionate about building meaningful solutions. Whether it's clean, well-written code or a strategy backed by data, we approach every project with care and curiosity. We believe the best work comes from listening first, understanding fully, and then crafting something that truly resonates.
+           Askyline Digital is a tech-based digital marketing agency in Bangalore with a core belief: technology is the backbone of every great brand in the digital age. We’re not just marketers, we’re builders, developers, and problem-solvers who use technology to craft meaningful, scalable solutions for startups and growing businesses.
           </motion.p>
           <motion.p
             className="text-lg text-gray-300 leading-relaxed"
@@ -128,16 +128,23 @@ export default function AboutUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            At Askyline Digital, we chose our name with intention. It's about helping our clients rise building their presence, sharpening their edge, and guiding their brand towards where it truly belongs. The top isn't just a goal, it's a journey we take together.
+           From high-performance websites to robust mobile applications and data-driven marketing ecosystems, we design and develop systems that are built to adapt and evolve. Every solution we deliver is grounded in technology and tailored to your business goals—because we know that true growth happens when strategy meets smart execution.
           </motion.p>
-
           <motion.p
             className="text-lg text-gray-300 leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            We don't believe in shortcuts or loud promises. We believe in clarity, consistency, and doing our best work every single time. Every decision we make is driven by purpose. We're not here to overwhelm you with jargon or sell you something you don't need. We're here to understand your business, bring your ideas to life, and grow something real with you.
+            Recognized as one of the top digital marketing agencies in Bangalore, we go beyond surface-level campaigns. As a digital solutions company in Bangalore, we combine deep technical expertise with creative insight to help brands move faster, operate smarter, and connect better with their audience.
+          </motion.p>
+          <motion.p
+            className="text-lg text-gray-300 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+          >
+            At Askyline, we stay grounded in our values: transparency, collaboration, and simplicity, while elevating your brand through future-ready digital solutions. Whether you're a startup looking for a strong tech foundation or a growing business seeking a reliable digital partner, we're here to build what matters.
           </motion.p>
 
           {/* Stats Grid */}
@@ -159,11 +166,10 @@ export default function AboutUs() {
                   <p className="text-2xl font-bold">
                     <motion.span>{rounded}</motion.span>+
                   </p>
-                  <p className="text-sm text-gray-400">Clients</p>
+                  <p className="text-sm text-gray-400">Happy Clients</p>
                 </div>
               </div>
             </motion.div>
-
             <motion.div 
               className="p-4 rounded-xl bg-gray-800/50 backdrop-blur-sm border border-gray-700 hover:border-blue-500/50 transition-colors"
               whileHover={{ y: -5 }}
@@ -174,7 +180,7 @@ export default function AboutUs() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold">60+</p>
-                  <p className="text-sm text-gray-400">Projects</p>
+                  <p className="text-sm text-gray-400">Projects Delivered</p>
                 </div>
               </div>
             </motion.div>
@@ -185,60 +191,16 @@ export default function AboutUs() {
             >
               <div className="flex items-center gap-3">
                 <div className="p-2 rounded-lg bg-green-500/20">
-                  <Globe className="w-5 h-5 text-green-400" />
+                  <Workflow className="w-5 h-5 text-green-400" />
                 </div>
                 <div>
                   <p className="text-2xl font-bold">6+</p>
-                  <p className="text-sm text-gray-400">Experience</p>
+                  <p className="text-sm text-gray-400">Years of Industry Experiencee</p>
                 </div>
               </div>
             </motion.div>
           </motion.div>
 
-          <motion.div
-            className="flex flex-wrap gap-4 pt-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-          >
-            <Button
-              size="lg"
-              className="group relative overflow-hidden"
-            >
-              <a href="/services">
-                <span className="relative z-10 flex items-center gap-2">
-                  <Rocket className="w-4 h-4 transition-transform group-hover:rotate-12" />
-                  Explore Services
-                </span>
-                <motion.span 
-                  className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500"
-                  initial={{ opacity: 1 }}
-                  whileHover={{
-                    opacity: 0.9,
-                    background: [
-                      'linear-gradient(to right, #8b5cf6, #3b82f6)',
-                      'linear-gradient(to right, #3b82f6, #8b5cf6)'
-                    ],
-                    transition: { duration: 0.5 }
-                  }}
-                />
-              </a>
-            </Button>
-
-            <Button
-              variant="outline"
-              size="lg"
-              className="group relative overflow-hidden hover:bg-gray-800/50"
-            >
-              <a href="/contact">
-                <span className="relative z-10 flex items-center gap-2">
-                  <MessageCircle className="w-4 h-4 transition-transform group-hover:rotate-12" />
-                  Get in Touch
-                </span>
-                <span className="absolute inset-0 bg-gradient-to-r from-gray-800/50 to-gray-800/50 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </a>
-            </Button>
-          </motion.div>
         </motion.div>
 
         {/* Image Section */}
