@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Analytics } from '@vercel/analytics/next';
 import { GA_TRACKING_ID } from '@/lib/gtag';
 import Script from 'next/script';
+<meta name="google-site-verification" content="r3jko59OeBJBP-PYhP5H2AzMR66DkZBuFf3pb-OjnVU" />
 
 const poppins = Poppins({ 
   subsets: ['latin'],
@@ -22,6 +23,10 @@ export const metadata: Metadata = {
   title: 'Askylinedigital - Web Development & Digital Marketing Agency',
   description: 'Professional web development, app development, SEO, and digital marketing services to help your business grow.',
   keywords: 'web development, app development, digital marketing, SEO, online marketing, web design, eCommerce development',
+  metadataBase: new URL('https://askylinedigital.com'), // ✅ Add this line
+  other: {
+    'google-site-verification': 'r3jko59OeBJBP-PYhP5H2AzMR66DkZBuFf3pb-OjnVU',
+  },
   openGraph: {
     title: 'Askylinedigital - Web Development & Digital Marketing Agency',
     description: 'Professional web development, app development, SEO, and digital marketing services to help your business grow.',

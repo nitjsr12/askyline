@@ -36,12 +36,12 @@ export function WhyChooseUsHome() {
   const reasons = [
     {
       icon: Ear,
-      title: "We Listen First",
-      description: "Every project begins with understanding your vision, goals, and challenges. We ask the right questions and pay attention to what matters."
+      title: "Tech-Driven Approach",
+      description: "We combine cutting-edge technology with creative solutions, ensuring your digital presence is built to scale and adapt to future needs."
     },
     {
       icon: Target,
-      title: "We Keep It Simple",
+      title: "Tailored for Startups and Growth",
       description: "No fancy buzzwords or overcomplication. Just clear, thoughtful solutions built to solve real problems."
     },
     {
@@ -87,7 +87,7 @@ export function WhyChooseUsHome() {
             variants={item}
             className="text-xl text-gray-600 mb-12"
           >
-            We don&apos;t overpromise. We stay committed to doing the work right—with intention, clarity, and care.
+            We don't overpromise. We simply stay committed to doing the work right — with intention, clarity, and care.
           </motion.p>
 
           <motion.div 

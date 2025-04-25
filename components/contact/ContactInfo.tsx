@@ -7,15 +7,15 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Address",
-    content: "HSR Layout, Bengaluru, Karnataka 560102",
+    content: "1st stage, BTM Layout, Bengaluru, Karnataka 560068",
     link: "https://maps.google.com/?q=HSR+Layout+Bengaluru",
     color: "text-red-400"
   },
   {
     icon: Phone,
     title: "Phone",
-    content: "+91 89185 67430",
-    link: "tel:+918918567430",
+    content: "+91 7256889395",
+    link: "tel:+917256889395",
     color: "text-blue-400"
   },
   {
@@ -28,8 +28,8 @@ const contactInfo = [
   {
     icon: MessageCircle,
     title: "WhatsApp",
-    content: "+91 89185 67430",
-    link: "https://wa.me/918918567430",
+    content: "+91 7256889395",
+    link: "https://wa.me/917256889395",
     color: "text-green-400"
   }
 ];
@@ -84,7 +84,7 @@ export function ContactInfo() {
           <div>
             <h3 className="font-medium text-gray-300 mb-1">Working Hours</h3>
             <p className="text-gray-400">Monday - Friday: 9AM - 6PM</p>
-            <p className="text-gray-400">Saturday: 10AM - 4PM</p>
+            <p className="text-gray-400">Saturday: 10AM - 6PM</p>
           </div>
         </div>
       </div>
