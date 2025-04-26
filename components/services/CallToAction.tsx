@@ -115,8 +115,8 @@ export function CallToAction() {
         transition={{ delay: 1.2 }}
       >
         <span>Or call us directly: </span>
-        <a href="tel:+918918567430" className="text-blue-400 hover:text-blue-300 transition-colors">
-          +91 89185 67430
+        <a href="tel:+917256889395" className="text-blue-400 hover:text-blue-300 transition-colors">
+          +91 7256889395
         </a>
       </motion.div>
     </section>
