@@ -1,6 +1,7 @@
 "use client";
 
 import { Building2, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 const socialLinks = [
@@ -17,10 +18,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2 text-2xl font-bold text-white">
-              <Building2 className="h-6 w-6 text-primary" />
-              <span>Askylinedigital</span>
-            </Link>
+          <Link href="/">
+            <Image src="/images/askyline.png" alt="Logo" width={200} height={50} />
+          </Link>
             <p className="opacity-80 text-sm">
               Elevating businesses through innovative digital solutions and strategic growth. Let&apos;s build the future together.
             </p>

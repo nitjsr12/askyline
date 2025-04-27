@@ -3,6 +3,7 @@
 import { Building2, Menu, X, ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
+import Image from "next/image";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -31,10 +32,8 @@ export function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="flex items-center gap-2 text-2xl font-bold text-white"
           >
-            <Building2 className="h-8 w-8 text-primary" />
-            <span>Askylinedigital</span>
+            <Image src="/images/askyline.png" alt="Logo" width={200} height={50} />
           </Link>
 
           {/* Desktop Navigation */}

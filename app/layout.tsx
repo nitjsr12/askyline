@@ -23,7 +23,10 @@ export const metadata: Metadata = {
   title: 'Askylinedigital - Web Development & Digital Marketing Agency',
   description: 'Professional web development, app development, SEO, and digital marketing services to help your business grow.',
   keywords: 'web development, app development, digital marketing, SEO, online marketing, web design, eCommerce development',
-  metadataBase: new URL('https://askylinedigital.com'), // ✅ Add this line
+  metadataBase: new URL('https://askylinedigital.com'), 
+  icons: {
+    icon: 'public/favicon.ico', 
+  },
   other: {
     'google-site-verification': 'r3jko59OeBJBP-PYhP5H2AzMR66DkZBuFf3pb-OjnVU',
   },
