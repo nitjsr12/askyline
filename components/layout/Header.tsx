@@ -19,6 +19,7 @@ const navigation = [
     ]
   },
   { name: "Blogs", href: "/blog" },
+  { name: "Website Audit", href: "/website-audit" },
 ];
 
 export function Header() {
