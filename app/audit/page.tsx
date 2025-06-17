@@ -691,7 +691,7 @@ export default function AuditResults() {
                 </div>
                 <div className="space-y-4">
                   <h4 className="font-semibold text-lg">Recommendations</h4>
-                  {auditData.performance.recommendations.map((rec: any, index: number) => (
+                  {auditData.performance.recommendations?.map((rec: any, index: number) => (
                     <Alert key={index} className={`${rec.type === 'critical' ? 'border-red-200 dark:border-red-800' : rec.type === 'warning' ? 'border-yellow-200 dark:border-yellow-800' : 'border-blue-200 dark:border-blue-800'}`}>
                       <div className="flex items-start space-x-3">
                         {getRecommendationIcon(rec.type)}

@@ -1,79 +1,214 @@
-import { NextRequest, NextResponse } from 'next/server';
+// /src/app/api/audit/route.ts
 
+import { NextRequest, NextResponse } from 'next/server';
+import * as cheerio from 'cheerio';
+import puppeteer from 'puppeteer';
+import axe from 'axe-core';
+
+// Main handler for the POST request
 export async function POST(request: NextRequest) {
   try {
     const { url } = await request.json();
+    if (!url) return NextResponse.json({ error: 'URL is required' }, { status: 400 });
+    new URL(url); // Validate URL format
 
-    if (!url) {
-      return NextResponse.json(
-        { error: 'URL is required' },
-        { status: 400 }
-      );
-    }
+    // --- PARALLEL AUDIT EXECUTION ---
+    // Run all audits simultaneously for maximum speed.
+    const [
+      psiData,
+      securityData,
+      onPageSeoData,
+      // accessibilityData // Disabling by default due to high resource usage
+    ] = await Promise.all([
+      runPsiAnalysis(url),
+      checkSecurityHeaders(url),
+      analyzeOnPageSeo(url),
+      // runAccessibilityCheck(url), // See note about resource intensity
+    ]);
 
-    // Validate URL format
-    try {
-      new URL(url);
-    } catch {
-      return NextResponse.json(
-        { error: 'Invalid URL format' },
-        { status: 400 }
-      );
-    }
+    // --- MERGE RESULTS INTO A SINGLE REPORT ---
+    const mergedData = mergeAuditData({
+      psiData,
+      securityData,
+      onPageSeoData,
+      // accessibilityData
+    });
 
-    // Simulate API processing time
-    await new Promise(resolve => setTimeout(resolve, 2000));
-
-    // In a real implementation, you would:
-    // 1. Fetch the website content
-    // 2. Run performance tests (Lighthouse, PageSpeed Insights API)
-    // 3. Analyze SEO factors
-    // 4. Check security headers
-    // 5. Test mobile responsiveness
-    // 6. Validate accessibility compliance
-
-    const auditData = await performWebsiteAudit(url);
-
-    return NextResponse.json(auditData);
-  } catch (error) {
+    return NextResponse.json(mergedData);
+  } catch (error: any) {
     console.error('Audit API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to audit website' },
-      { status: 500 }
-    );
+    const errorMessage = error.message || 'Failed to audit website';
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
 
-async function performWebsiteAudit(url: string) {
-  // This would integrate with real audit services like:
-  // - Google PageSpeed Insights API
-  // - Lighthouse CI
-  // - Security header checkers
-  // - SEO analysis tools
+// =================================================================
+// 1. Google PageSpeed Insights (Lighthouse)
+// =================================================================
+async function runPsiAnalysis(url: string) {
+  const apiKey = process.env.GOOGLE_API_KEY;
+  if (!apiKey) throw new Error('Google API key is not configured.');
   
-  // For now, we'll generate realistic dynamic data based on the URL
-  const domain = new URL(url).hostname;
-  const isHttps = url.startsWith('https://');
-  
-  // Generate scores based on URL characteristics (for demo purposes)
-  const baseScore = Math.floor(Math.random() * 30) + 60; // 60-90 range
-  const performanceScore = Math.min(100, baseScore + (isHttps ? 10 : 0));
-  const securityScore = isHttps ? Math.floor(Math.random() * 20) + 75 : Math.floor(Math.random() * 30) + 40;
-  const seoScore = Math.floor(Math.random() * 25) + 65;
-  const accessibilityScore = Math.floor(Math.random() * 30) + 70;
-  const mobileScore = Math.floor(Math.random() * 20) + 80;
-  const technicalScore = Math.floor(Math.random() * 35) + 55;
-  
-  const overallScore = Math.round(
-    (performanceScore + securityScore + seoScore + accessibilityScore + mobileScore + technicalScore) / 6
-  );
+  const psiApiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&key=${apiKey}&category=PERFORMANCE&category=ACCESSIBILITY&category=BEST_PRACTICES&category=SEO&strategy=DESKTOP`;
 
-  // Simulate fetching real website data
-  const websiteData = await analyzeWebsite(url);
+  const response = await fetch(psiApiUrl);
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(`PageSpeed API Error: ${error.error.message}`);
+  }
+  return response.json();
+}
+
+// =================================================================
+// 2. Security Header Checker
+// =================================================================
+async function checkSecurityHeaders(url: string) {
+  try {
+    const response = await fetch(url, { method: 'HEAD' });
+    const headers = response.headers;
+    return {
+      hsts: headers.has('strict-transport-security'),
+      csp: headers.has('content-security-policy'),
+      xframe: headers.get('x-frame-options')?.toLowerCase() || 'not-found',
+      xss: headers.get('x-xss-protection') === '1; mode=block',
+      contentTypeOptions: headers.get('x-content-type-options') === 'nosniff',
+    };
+  } catch (error) {
+    console.error('Failed to check security headers:', error);
+    return null; // Return null on failure
+  }
+}
+
+// =================================================================
+// 3. SEO Analysis Tool (On-Page) using Cheerio
+// =================================================================
+async function analyzeOnPageSeo(url: string) {
+  try {
+    const response = await fetch(url);
+    const html = await response.text();
+    const $ = cheerio.load(html);
+
+    const images = $('img');
+    const imagesWithAlt = images.filter((i, el) => $(el).attr('alt')?.trim() !== '').length;
+
+    const internalLinks = new Set<string>();
+    const externalLinks = new Set<string>();
+    const urlHostname = new URL(url).hostname;
+    
+    $('a').each((i, el) => {
+        const href = $(el).attr('href');
+        if (href) {
+            try {
+                const linkUrl = new URL(href, url); // Resolve relative URLs
+                if (linkUrl.hostname === urlHostname) {
+                    internalLinks.add(linkUrl.href);
+                } else {
+                    externalLinks.add(linkUrl.href);
+                }
+            } catch (e) { /* ignore invalid hrefs */ }
+        }
+    });
+
+    return {
+      title: $('title').text(),
+      metaDescription: $('meta[name="description"]').attr('content') || null,
+      headings: {
+        h1: $('h1').length,
+        h2: $('h2').length,
+        h3: $('h3').length,
+        h4: $('h4').length,
+      },
+      images: {
+        total: images.length,
+        withAlt: imagesWithAlt,
+        withoutAlt: images.length - imagesWithAlt,
+      },
+      links: {
+          internal: internalLinks.size,
+          external: externalLinks.size
+      }
+    };
+  } catch (error) {
+    console.error('Failed to analyze on-page SEO:', error);
+    return null;
+  }
+}
+
+// =================================================================
+// 4. Accessibility Validator using Puppeteer & Axe-Core
+// NOTE: This is resource-intensive and may time out on serverless functions.
+// Enable with caution and consider a background job architecture.
+// =================================================================
+async function runAccessibilityCheck(url: string) {
+  let browser;
+  try {
+    browser = await puppeteer.launch({ args: ['--no-sandbox'] }); // --no-sandbox is often needed in container environments
+    const page = await browser.newPage();
+    await page.goto(url, { waitUntil: 'networkidle0' });
+    await page.addScriptTag({ path: require.resolve('axe-core') });
+    
+    const results = await page.evaluate(() => (window as any).axe.run());
+    return results;
+  } catch (error) {
+    console.error('Failed to run accessibility check:', error);
+    return null;
+  } finally {
+    if (browser) await browser.close();
+  }
+}
+
+
+// =================================================================
+// Data Merger - The final step to combine all results
+// =================================================================
+function mergeAuditData({ psiData, securityData, onPageSeoData, accessibilityData }: any) {
+  const lighthouseResult = psiData.lighthouseResult;
+  const audits = lighthouseResult.audits;
+  const url = lighthouseResult.finalUrl;
+
+  // --- HELPER FUNCTION to get recommendations ---
+  const getRecommendations = (categoryAuditRefs: any[] | undefined) => {
+    if (!categoryAuditRefs) return []; // Return empty array if refs are missing
+    return categoryAuditRefs
+      .filter((ref: any) => ref.weight > 0 && audits[ref.id]?.score !== null && audits[ref.id]?.score < 1)
+      .map((ref: any) => {
+        const audit = audits[ref.id];
+        return {
+          type: audit.score === 0 ? 'critical' : 'warning',
+          title: audit.title,
+          description: audit.description.replace(/\[Learn more\]\(.*\)/, '').trim(),
+          impact: audit.details?.overallSavingsMs ? `High (~${Math.round(audit.details.overallSavingsMs / 1000)}s saving)` : 'Medium',
+        };
+      });
+  };
+
+  // Scores from PSI
+  const performanceScore = Math.round((lighthouseResult.categories.performance?.score ?? 0) * 100);
+  const accessibilityScore = Math.round((lighthouseResult.categories.accessibility?.score ?? 0) * 100);
+  const seoScore = Math.round((lighthouseResult.categories.seo?.score ?? 0) * 100);
+  const technicalScore = Math.round((lighthouseResult.categories['best-practices']?.score ?? 0) * 100);
+
+  // Derive scores for Security and Mobile from specific audits (with safety checks)
+  const securityChecks = [audits['is-on-https']?.score ?? 0];
+  if (securityData) {
+      securityChecks.push(
+          securityData.hsts ? 1 : 0,
+          securityData.csp ? 1 : 0,
+          securityData.contentTypeOptions ? 1 : 0
+      );
+  }
+  const securityScore = Math.round((securityChecks.reduce((a, b) => a + b, 0) / securityChecks.length) * 100);
+  
+  // =================================================================
+  // THIS IS THE LINE THAT CAUSED THE ERROR - NOW FIXED
+  // =================================================================
+  const mobileScore = Math.round((((audits['viewport']?.score ?? 0) + (audits['tap-targets']?.score ?? 0)) / 2) * 100);
+
+  const overallScore = Math.round((performanceScore + accessibilityScore + seoScore + technicalScore + securityScore + mobileScore) / 6);
 
   return {
     url,
-    timestamp: new Date().toISOString(),
+    timestamp: new Date(lighthouseResult.fetchTime).toISOString(),
     overallScore,
     scores: {
       performance: performanceScore,
@@ -84,224 +219,49 @@ async function performWebsiteAudit(url: string) {
       technical: technicalScore
     },
     performance: {
-      firstContentfulPaint: (Math.random() * 2 + 0.8).toFixed(1),
-      largestContentfulPaint: (Math.random() * 3 + 1.5).toFixed(1),
-      cumulativeLayoutShift: (Math.random() * 0.2).toFixed(3),
-      firstInputDelay: Math.floor(Math.random() * 50 + 10),
-      recommendations: generatePerformanceRecommendations(performanceScore)
+      firstContentfulPaint: audits['first-contentful-paint']?.displayValue ?? 'N/A',
+      largestContentfulPaint: audits['largest-contentful-paint']?.displayValue ?? 'N/A',
+      cumulativeLayoutShift: audits['cumulative-layout-shift']?.displayValue ?? 'N/A',
+      firstInputDelay: audits['interactive']?.displayValue ?? 'N/A',
+      recommendations: getRecommendations(lighthouseResult.categories.performance?.auditRefs),
     },
     seo: {
-      title: websiteData.hasTitle ? 'Present' : 'Missing',
-      metaDescription: websiteData.hasMetaDescription ? 'Present' : 'Missing',
-      headings: websiteData.headings,
-      internalLinks: websiteData.internalLinks,
-      externalLinks: websiteData.externalLinks,
-      images: websiteData.images,
-      recommendations: generateSEORecommendations(seoScore, websiteData)
+      title: onPageSeoData?.title || (audits['document-title']?.score === 1 ? 'Present' : 'Missing'),
+      metaDescription: onPageSeoData?.metaDescription || (audits['meta-description']?.score === 1 ? 'Present' : 'Missing'),
+      headings: onPageSeoData?.headings || { h1: 'N/A' },
+      internalLinks: onPageSeoData?.links?.internal ?? 'N/A',
+      externalLinks: onPageSeoData?.links?.external ?? 'N/A',
+      images: onPageSeoData?.images || { withoutAlt: 'N/A' },
+      recommendations: getRecommendations(lighthouseResult.categories.seo?.auditRefs),
     },
     accessibility: {
       wcagLevel: accessibilityScore >= 85 ? 'AAA' : 'AA',
       issues: {
-        critical: accessibilityScore < 70 ? Math.floor(Math.random() * 5) + 1 : Math.floor(Math.random() * 2),
-        warning: Math.floor(Math.random() * 8) + 2,
-        info: Math.floor(Math.random() * 5) + 1
+        critical: lighthouseResult.categories.accessibility?.auditRefs?.filter((ref: any) => audits[ref.id]?.score === 0).length ?? 0,
+        warning: lighthouseResult.categories.accessibility?.auditRefs?.filter((ref: any) => audits[ref.id]?.score > 0 && audits[ref.id]?.score < 1).length ?? 0,
+        info: 0,
       },
-      recommendations: generateAccessibilityRecommendations(accessibilityScore)
+      recommendations: getRecommendations(lighthouseResult.categories.accessibility?.auditRefs),
     },
     security: {
-      httpsEnabled: isHttps,
-      sslCertificate: isHttps ? 'Valid' : 'Missing',
-      securityHeaders: {
-        hsts: Math.random() > 0.6,
-        csp: Math.random() > 0.7,
-        xframe: Math.random() > 0.3,
-        xss: Math.random() > 0.4
-      },
-      recommendations: generateSecurityRecommendations(securityScore, isHttps)
+      httpsEnabled: audits['is-on-https']?.score === 1,
+      sslCertificate: audits['is-on-https']?.score === 1 ? 'Valid' : 'Missing or Invalid',
+      securityHeaders: securityData || { hsts: false, csp: false, xframe: 'not-found', xss: false },
+      recommendations: getRecommendations(lighthouseResult.categories['best-practices']?.auditRefs?.filter((ref:any) => ['is-on-https', 'no-vulnerable-libraries'].includes(ref.id))),
     },
     mobile: {
-      responsive: mobileScore > 70,
-      viewportMeta: Math.random() > 0.2,
-      touchTargets: mobileScore > 80 ? 'Good' : 'Needs Improvement',
-      textSize: mobileScore > 75 ? 'Readable' : 'Too Small',
-      recommendations: generateMobileRecommendations(mobileScore)
+        responsive: audits['viewport']?.score === 1,
+        viewportMeta: audits['viewport']?.score === 1,
+        touchTargets: audits['tap-targets']?.score === 1 ? 'Good' : 'Needs Improvement',
+        textSize: audits['font-size']?.score === 1 ? 'Readable' : 'Too Small',
+        recommendations: getRecommendations(lighthouseResult.categories.performance?.auditRefs?.filter((ref:any) => ['viewport', 'tap-targets', 'font-size'].includes(ref.id)))
     },
     technical: {
-      pageSize: (Math.random() * 3 + 0.5).toFixed(1),
-      requests: Math.floor(Math.random() * 60) + 20,
-      gzipEnabled: Math.random() > 0.3,
-      cdnUsage: Math.random() > 0.6,
-      recommendations: generateTechnicalRecommendations(technicalScore)
+      pageSize: ((audits['total-byte-weight']?.numericValue ?? 0) / (1024 * 1024)).toFixed(2), // In MB
+      requests: audits['network-requests']?.numericValue ?? 0,
+      gzipEnabled: audits['uses-text-compression']?.score === 1,
+      cdnUsage: audits['uses-optimized-images']?.score === 1,
+      recommendations: getRecommendations(lighthouseResult.categories['best-practices']?.auditRefs),
     }
   };
-}
-
-async function analyzeWebsite(url: string) {
-  // In a real implementation, this would fetch and parse the website
-  // For demo purposes, we'll simulate website analysis
-  
-  return {
-    hasTitle: Math.random() > 0.1,
-    hasMetaDescription: Math.random() > 0.2,
-    headings: {
-      h1: Math.floor(Math.random() * 3) + 1,
-      h2: Math.floor(Math.random() * 8) + 2,
-      h3: Math.floor(Math.random() * 12) + 3,
-      h4: Math.floor(Math.random() * 6)
-    },
-    internalLinks: Math.floor(Math.random() * 80) + 20,
-    externalLinks: Math.floor(Math.random() * 25) + 5,
-    images: {
-      total: Math.floor(Math.random() * 40) + 10,
-      withAlt: 0,
-      withoutAlt: 0
-    }
-  };
-}
-
-function generatePerformanceRecommendations(score: number) {
-  const recommendations = [];
-  
-  if (score < 70) {
-    recommendations.push({
-      type: 'critical',
-      title: 'Optimize images',
-      description: 'Compress and resize images to improve loading speed',
-      impact: 'High'
-    });
-  }
-  
-  if (score < 80) {
-    recommendations.push({
-      type: 'warning',
-      title: 'Minify CSS and JavaScript',
-      description: 'Remove unnecessary characters from CSS and JS files',
-      impact: 'Medium'
-    });
-  }
-  
-  recommendations.push({
-    type: 'info',
-    title: 'Enable browser caching',
-    description: 'Set appropriate cache headers for static resources',
-    impact: 'Medium'
-  });
-  
-  return recommendations;
-}
-
-function generateSEORecommendations(score: number, websiteData: any) {
-  const recommendations = [];
-  
-  if (!websiteData.hasTitle) {
-    recommendations.push({
-      type: 'critical',
-      title: 'Missing title tag',
-      description: 'Add a descriptive title tag to improve search rankings',
-      impact: 'High'
-    });
-  }
-  
-  if (!websiteData.hasMetaDescription) {
-    recommendations.push({
-      type: 'warning',
-      title: 'Missing meta description',
-      description: 'Add a compelling meta description to improve click-through rates',
-      impact: 'Medium'
-    });
-  }
-  
-  if (websiteData.images.withoutAlt > 0) {
-    recommendations.push({
-      type: 'critical',
-      title: 'Missing alt text',
-      description: `${websiteData.images.withoutAlt} images are missing alt text for accessibility`,
-      impact: 'High'
-    });
-  }
-  
-  return recommendations;
-}
-
-function generateAccessibilityRecommendations(score: number) {
-  const recommendations = [];
-  
-  if (score < 80) {
-    recommendations.push({
-      type: 'critical',
-      title: 'Color contrast issues',
-      description: 'Some elements have insufficient color contrast ratios',
-      impact: 'High'
-    });
-  }
-  
-  recommendations.push({
-    type: 'warning',
-    title: 'Form labels',
-    description: 'Ensure all form inputs have proper labels',
-    impact: 'Medium'
-  });
-  
-  return recommendations;
-}
-
-function generateSecurityRecommendations(score: number, isHttps: boolean) {
-  const recommendations = [];
-  
-  if (!isHttps) {
-    recommendations.push({
-      type: 'critical',
-      title: 'Enable HTTPS',
-      description: 'Secure your website with SSL/TLS encryption',
-      impact: 'High'
-    });
-  }
-  
-  if (score < 80) {
-    recommendations.push({
-      type: 'warning',
-      title: 'Security headers',
-      description: 'Implement security headers like HSTS, CSP, and X-Frame-Options',
-      impact: 'Medium'
-    });
-  }
-  
-  return recommendations;
-}
-
-function generateMobileRecommendations(score: number) {
-  const recommendations = [];
-  
-  if (score < 80) {
-    recommendations.push({
-      type: 'warning',
-      title: 'Mobile optimization',
-      description: 'Improve mobile user experience and responsive design',
-      impact: 'Medium'
-    });
-  }
-  
-  return recommendations;
-}
-
-function generateTechnicalRecommendations(score: number) {
-  const recommendations = [];
-  
-  if (score < 70) {
-    recommendations.push({
-      type: 'critical',
-      title: 'Page optimization',
-      description: 'Reduce page size and number of HTTP requests',
-      impact: 'High'
-    });
-  }
-  
-  recommendations.push({
-    type: 'info',
-    title: 'CDN implementation',
-    description: 'Use a Content Delivery Network to improve global performance',
-    impact: 'Medium'
-  });
-  
-  return recommendations;
 }
