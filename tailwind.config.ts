@@ -1,5 +1,11 @@
 import type { Config } from 'tailwindcss';
-import { colors } from './lib/constants/theme';
+
+// Theme colors
+const themeColors = {
+  primary: "#00A9E0",    // Sky blue
+  secondary: "#5A00FF",  // Deep purple
+  accent: "#F5F5F5",     // Light gray
+} as const;
 
 const config: Config = {
   darkMode: ['class'],
@@ -16,15 +22,15 @@ const config: Config = {
       },
       colors: {
         primary: {
-          DEFAULT: colors.primary,
+          DEFAULT: themeColors.primary,
           foreground: '#FFFFFF',
         },
         secondary: {
-          DEFAULT: colors.secondary,
+          DEFAULT: themeColors.secondary,
           foreground: '#FFFFFF',
         },
         accent: {
-          DEFAULT: colors.accent,
+          DEFAULT: themeColors.accent,
           foreground: '#000000',
         },
         background: 'hsl(var(--background))',
