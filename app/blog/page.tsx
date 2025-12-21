@@ -1,7 +1,8 @@
-import { getPosts } from '@/lib/wordpress';
+import { getPosts, getCategories, calculateReadingTime } from '@/lib/blog';
 import { BlogGrid } from '@/components/blog/BlogGrid';
 import { BlogHero } from '@/components/blog/BlogHero';
-
+import { BlogCategories } from '@/components/blog/blog-categories';
+import { BlogSearch } from '@/components/blog/blog-search';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -15,23 +16,43 @@ export const metadata: Metadata = {
     siteName: 'Askylinedigital',
   }
 };
-export default async function BlogPage() {
-  const posts = await getPosts();
+
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string; search?: string }>;
+}) {
+  const resolvedSearchParams = await searchParams;
+  const category = resolvedSearchParams.category;
+  const search = resolvedSearchParams.search;
   
-  // Transform WordPress data to match your component's expected format
-  const formattedPosts = posts.map((post: any) => ({
-    title: post.title.rendered,
-    excerpt: post.excerpt.rendered.replace(/<[^>]*>?/gm, '').substring(0, 150) + '...',
+  const { posts } = await getPosts(1, 100, category, search);
+  const categories = await getCategories();
+  
+  // Transform data to match component's expected format
+  const formattedPosts = posts.map((post) => ({
+    title: post.title,
+    excerpt: post.excerpt,
     date: post.date,
-    category: post._embedded['wp:term'][0][0]?.name || 'Uncategorized',
-    image: post._embedded['wp:featuredmedia']?.[0]?.source_url || '/default-blog-image.jpg',
+    category: post.category,
+    image: post.image,
     slug: post.slug,
-    readTime: Math.ceil(post.content.rendered.split(' ').length / 200) // ~200 words per minute
+    readTime: calculateReadingTime(post.content)
+  }));
+
+  // Transform categories for BlogCategories component
+  const formattedCategories = categories.map((cat) => ({
+    name: cat.name,
+    slug: cat.slug,
   }));
 
   return (
     <main>
       <BlogHero/>
+      <div className="container mx-auto px-6 py-12">
+        <BlogSearch />
+        <BlogCategories categories={formattedCategories} />
+      </div>
       <BlogGrid posts={formattedPosts} />
     </main>
   );

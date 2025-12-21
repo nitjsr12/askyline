@@ -8,9 +8,8 @@ const nextConfig = {
     unoptimized: true, // disable image optimization
     domains: ['askylinedigital.online'], // still required in some edge cases
   },
-  experimental: {
-    serverActions: true,
-  },
+  // Server Actions are enabled by default in Next.js 15+
+  // No need to configure experimental.serverActions
 };
 
 export default nextConfig;

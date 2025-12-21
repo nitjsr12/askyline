@@ -658,7 +658,9 @@ export default function AuditResults() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">
-                      {auditData.performance.firstContentfulPaint}s
+                      {typeof auditData.performance.firstContentfulPaint === 'string' && auditData.performance.firstContentfulPaint !== 'N/A' 
+                        ? `${auditData.performance.firstContentfulPaint}s` 
+                        : auditData.performance.firstContentfulPaint}
                     </div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       First Contentful Paint
@@ -666,7 +668,9 @@ export default function AuditResults() {
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-yellow-600 dark:text-yellow-400 mb-1">
-                      {auditData.performance.largestContentfulPaint}s
+                      {typeof auditData.performance.largestContentfulPaint === 'string' && auditData.performance.largestContentfulPaint !== 'N/A'
+                        ? `${auditData.performance.largestContentfulPaint}s`
+                        : auditData.performance.largestContentfulPaint}
                     </div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       Largest Contentful Paint
@@ -682,7 +686,9 @@ export default function AuditResults() {
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-green-600 dark:text-green-400 mb-1">
-                      {auditData.performance.firstInputDelay}ms
+                      {typeof auditData.performance.firstInputDelay === 'string' && auditData.performance.firstInputDelay !== 'N/A'
+                        ? `${auditData.performance.firstInputDelay}ms`
+                        : auditData.performance.firstInputDelay}
                     </div>
                     <div className="text-sm text-gray-600 dark:text-gray-400">
                       First Input Delay
@@ -746,13 +752,13 @@ export default function AuditResults() {
                     <div className="flex justify-between items-center">
                       <span>Internal Links</span>
                       <Badge variant="outline">
-                        {auditData.seo.internalLinks}
+                        {auditData.seo.internalLinks !== 'N/A' ? auditData.seo.internalLinks : 0}
                       </Badge>
                     </div>
                     <div className="flex justify-between items-center">
                       <span>External Links</span>
                       <Badge variant="outline">
-                        {auditData.seo.externalLinks}
+                        {auditData.seo.externalLinks !== 'N/A' ? auditData.seo.externalLinks : 0}
                       </Badge>
                     </div>
                   </div>
@@ -760,25 +766,25 @@ export default function AuditResults() {
                     <div className="flex justify-between items-center">
                       <span>H1 Tags</span>
                       <Badge variant="outline">
-                        {auditData.seo.headings.h1}
+                        {auditData.seo.headings?.h1 ?? 0}
                       </Badge>
                     </div>
                     <div className="flex justify-between items-center">
                       <span>H2 Tags</span>
                       <Badge variant="outline">
-                        {auditData.seo.headings.h2}
+                        {auditData.seo.headings?.h2 ?? 0}
                       </Badge>
                     </div>
                     <div className="flex justify-between items-center">
                       <span>Images with Alt Text</span>
                       <Badge variant="outline">
-                        {auditData.seo.images.withAlt}/{auditData.seo.images.total}
+                        {auditData.seo.images?.withAlt ?? 0}/{auditData.seo.images?.total ?? 0}
                       </Badge>
                     </div>
                     <div className="flex justify-between items-center">
                       <span>Missing Alt Text</span>
                       <Badge variant="outline" className="text-red-600 dark:text-red-400">
-                        {auditData.seo.images.withoutAlt}
+                        {auditData.seo.images?.withoutAlt ?? 0}
                       </Badge>
                     </div>
                   </div>
@@ -909,28 +915,28 @@ export default function AuditResults() {
                     </div>
                     <div className="flex justify-between items-center">
                       <span>HSTS Header</span>
-                      <Badge variant="outline" className={auditData.security.securityHeaders.hsts ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
-                        {auditData.security.securityHeaders.hsts ? 'Present' : 'Missing'}
+                      <Badge variant="outline" className={auditData.security.securityHeaders?.hsts ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
+                        {auditData.security.securityHeaders?.hsts ? 'Present' : 'Missing'}
                       </Badge>
                     </div>
                   </div>
                   <div className="space-y-4">
                     <div className="flex justify-between items-center">
                       <span>Content Security Policy</span>
-                      <Badge variant="outline" className={auditData.security.securityHeaders.csp ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
-                        {auditData.security.securityHeaders.csp ? 'Present' : 'Missing'}
+                      <Badge variant="outline" className={auditData.security.securityHeaders?.csp ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
+                        {auditData.security.securityHeaders?.csp ? 'Present' : 'Missing'}
                       </Badge>
                     </div>
                     <div className="flex justify-between items-center">
                       <span>X-Frame-Options</span>
-                      <Badge variant="outline" className={auditData.security.securityHeaders.xframe ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
-                        {auditData.security.securityHeaders.xframe ? 'Present' : 'Missing'}
+                      <Badge variant="outline" className={auditData.security.securityHeaders?.xframe && auditData.security.securityHeaders.xframe !== 'not-found' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
+                        {auditData.security.securityHeaders?.xframe && auditData.security.securityHeaders.xframe !== 'not-found' ? 'Present' : 'Missing'}
                       </Badge>
                     </div>
                     <div className="flex justify-between items-center">
                       <span>X-XSS-Protection</span>
-                      <Badge variant="outline" className={auditData.security.securityHeaders.xss ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
-                        {auditData.security.securityHeaders.xss ? 'Present' : 'Missing'}
+                      <Badge variant="outline" className={auditData.security.securityHeaders?.xss ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
+                        {auditData.security.securityHeaders?.xss ? 'Present' : 'Missing'}
                       </Badge>
                     </div>
                   </div>
@@ -1050,13 +1056,13 @@ export default function AuditResults() {
                     <div className="flex justify-between items-center">
                       <span>Page Size</span>
                       <Badge variant="outline" className="text-yellow-600 dark:text-yellow-400">
-                        {auditData.technical.pageSize}MB
+                        {auditData.technical.pageSize !== 'N/A' ? `${auditData.technical.pageSize}MB` : 'N/A'}
                       </Badge>
                     </div>
                     <div className="flex justify-between items-center">
                       <span>HTTP Requests</span>
                       <Badge variant="outline" className="text-yellow-600 dark:text-yellow-400">
-                        {auditData.technical.requests}
+                        {auditData.technical.requests ?? 0}
                       </Badge>
                     </div>
                   </div>

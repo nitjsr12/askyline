@@ -47,16 +47,35 @@ export async function POST(request: NextRequest) {
 // =================================================================
 async function runPsiAnalysis(url: string) {
   const apiKey = process.env.GOOGLE_API_KEY;
-  if (!apiKey) throw new Error('Google API key is not configured.');
-  
-  const psiApiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&key=${apiKey}&category=PERFORMANCE&category=ACCESSIBILITY&category=BEST_PRACTICES&category=SEO&strategy=DESKTOP`;
-
-  const response = await fetch(psiApiUrl);
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(`PageSpeed API Error: ${error.error.message}`);
+  if (!apiKey) {
+    throw new Error('Google PageSpeed Insights API key is not configured. Please set GOOGLE_API_KEY in your environment variables.');
   }
-  return response.json();
+  
+  // Ensure URL has protocol
+  let auditUrl = url;
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    auditUrl = `https://${url}`;
+  }
+  
+  const psiApiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(auditUrl)}&key=${apiKey}&category=PERFORMANCE&category=ACCESSIBILITY&category=BEST_PRACTICES&category=SEO&strategy=DESKTOP`;
+
+  try {
+    const response = await fetch(psiApiUrl, {
+      next: { revalidate: 0 }, // Don't cache
+    });
+    
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({ error: { message: 'Unknown error' } }));
+      throw new Error(`PageSpeed API Error: ${error.error?.message || 'Failed to fetch data'}`);
+    }
+    
+    return response.json();
+  } catch (error: any) {
+    if (error.message.includes('API')) {
+      throw error;
+    }
+    throw new Error(`Failed to connect to PageSpeed Insights: ${error.message}`);
+  }
 }
 
 // =================================================================
@@ -64,7 +83,23 @@ async function runPsiAnalysis(url: string) {
 // =================================================================
 async function checkSecurityHeaders(url: string) {
   try {
-    const response = await fetch(url, { method: 'HEAD' });
+    // Ensure URL has protocol
+    let checkUrl = url;
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      checkUrl = `https://${url}`;
+    }
+    
+    const response = await fetch(checkUrl, { 
+      method: 'HEAD',
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; WebsiteAuditBot/1.0)',
+      },
+    });
+    
+    if (!response.ok) {
+      return null;
+    }
+    
     const headers = response.headers;
     return {
       hsts: headers.has('strict-transport-security'),
@@ -84,7 +119,22 @@ async function checkSecurityHeaders(url: string) {
 // =================================================================
 async function analyzeOnPageSeo(url: string) {
   try {
-    const response = await fetch(url);
+    // Ensure URL has protocol
+    let seoUrl = url;
+    if (!url.startsWith('http://') && !url.startsWith('https://')) {
+      seoUrl = `https://${url}`;
+    }
+    
+    const response = await fetch(seoUrl, {
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; WebsiteAuditBot/1.0)',
+      },
+    });
+    
+    if (!response.ok) {
+      return null;
+    }
+    
     const html = await response.text();
     const $ = cheerio.load(html);
 
@@ -219,10 +269,10 @@ function mergeAuditData({ psiData, securityData, onPageSeoData, accessibilityDat
       technical: technicalScore
     },
     performance: {
-      firstContentfulPaint: audits['first-contentful-paint']?.displayValue ?? 'N/A',
-      largestContentfulPaint: audits['largest-contentful-paint']?.displayValue ?? 'N/A',
+      firstContentfulPaint: audits['first-contentful-paint']?.displayValue?.replace('s', '') ?? 'N/A',
+      largestContentfulPaint: audits['largest-contentful-paint']?.displayValue?.replace('s', '') ?? 'N/A',
       cumulativeLayoutShift: audits['cumulative-layout-shift']?.displayValue ?? 'N/A',
-      firstInputDelay: audits['interactive']?.displayValue ?? 'N/A',
+      firstInputDelay: audits['interactive']?.displayValue?.replace('ms', '') ?? 'N/A',
       recommendations: getRecommendations(lighthouseResult.categories.performance?.auditRefs),
     },
     seo: {

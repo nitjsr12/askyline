@@ -1,41 +1,63 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
+import { getComments, createComment } from '@/lib/blog';
 
-const WP_URL = process.env.WORDPRESS_API_URL!;
-
-export async function GET(request: Request) {
-  const url = new URL(request.url);
-  const postId = url.searchParams.get('post');
+export async function GET(request: NextRequest) {
+  const searchParams = request.nextUrl.searchParams;
+  const postId = searchParams.get('post');
+  
   if (!postId) {
     return NextResponse.json({ error: 'Missing post ID' }, { status: 400 });
   }
-  const wpRes = await fetch(
-    `${WP_URL}/wp-json/wp/v2/comments?post=${postId}&per_page=100`
-  );
-  const comments = await wpRes.json();
-  return NextResponse.json(comments);
-}
 
-export async function POST(request: Request) {
-  const { postId, name, email, content } = await request.json();
-  if (!postId || !name || !email || !content) {
+  try {
+    const comments = await getComments(parseInt(postId));
+    // Transform to match the expected format
+    const formattedComments = comments.map(comment => ({
+      id: comment.id,
+      author_name: comment.author_name,
+      date: comment.date,
+      content: { rendered: comment.content },
+    }));
+    return NextResponse.json(formattedComments);
+  } catch (error) {
+    console.error('Error fetching comments:', error);
     return NextResponse.json(
-      { error: 'postId, name, email and content are required' },
-      { status: 400 }
+      { error: 'Failed to fetch comments' },
+      { status: 500 }
     );
   }
-  const wpRes = await fetch(`${WP_URL}/wp-json/wp/v2/comments`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      post: postId,
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const { postId, name, email, content } = await request.json();
+    
+    if (!postId || !name || !email || !content) {
+      return NextResponse.json(
+        { error: 'postId, name, email and content are required' },
+        { status: 400 }
+      );
+    }
+
+    const comment = await createComment({
+      postId: parseInt(postId),
       author_name: name,
       author_email: email,
       content,
-    }),
-  });
-  const data = await wpRes.json();
-  if (!wpRes.ok) {
-    return NextResponse.json(data, { status: wpRes.status });
+    });
+
+    // Return in the expected format
+    return NextResponse.json({
+      id: comment.id,
+      author_name: comment.author_name,
+      date: comment.date,
+      content: { rendered: comment.content },
+    });
+  } catch (error) {
+    console.error('Error creating comment:', error);
+    return NextResponse.json(
+      { error: 'Failed to create comment' },
+      { status: 500 }
+    );
   }
-  return NextResponse.json(data);
 }

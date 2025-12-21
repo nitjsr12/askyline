@@ -1,4 +1,4 @@
-import { getPostBySlug, getPosts, getLatestPosts, getCategories } from '@/lib/wordpress';
+import { getPostBySlug, getPosts, getLatestPosts, getCategories, calculateReadingTime } from '@/lib/blog';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
@@ -6,84 +6,68 @@ import styles from './postContent.module.css';
 import SocialShare from '@/components/blog/SocialShare';
 import { Metadata } from 'next';
 import Comments from '@/components/Comments';
+import type { BlogPost } from '@/lib/blog';
 
-// Type declarations for WordPress data
-interface Post {
-  id: number;
-  slug: string;
-  title: {
-    rendered: string;
-  };
-  date: string;
-  content: {
-    rendered:string;
-  };
-  excerpt?: {
-    rendered: string;
-  };
-  _embedded: {
-    'wp:featuredmedia'?: {
-      source_url: string;
-    }[];
-    author?: {
-      name: string;
-      description?: string;
-      avatar_urls?: {
-        '48': string;
-      };
-    }[];
-  };
-}
-
-interface Category {
-  id: number;
-  name: string;
-  slug: string;
-  count: number;
-}
-
-// --- FIX 1: REMOVE a custom `PageProps` type definition entirely ---
-// The type definition that was here has been deleted.
-
-// --- FIX 2: Use an inline type for the function props ---
 export async function generateMetadata(
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
-  const featuredImage = post._embedded['wp:featuredmedia']?.[0]?.source_url || '/default-banner.jpg';
+
+  if (!post) {
+    return {
+      title: 'Post Not Found',
+    };
+  }
+
+  const featuredImage = post.image || '/images/portfolio-1.jpg';
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://askylinedigital.com';
 
   return {
-    title: post.title.rendered,
-    description: post.excerpt?.rendered?.replace(/<[^>]+>/g, '') || '',
+    title: post.seo.metaTitle || post.title,
+    description: post.seo.metaDescription || post.excerpt,
+    keywords: post.seo.keywords,
     openGraph: {
-      title: post.title.rendered,
-      description: post.excerpt?.rendered?.replace(/<[^>]+>/g, '') || '',
+      title: post.seo.metaTitle || post.title,
+      description: post.seo.metaDescription || post.excerpt,
       type: 'article',
       images: [featuredImage],
-      url: `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${post.slug}`,
+      url: `${siteUrl}/blog/${post.slug}`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: post.title.rendered,
-      description: post.excerpt?.rendered?.replace(/<[^>]+>/g, '') || '',
+      title: post.seo.metaTitle || post.title,
+      description: post.seo.metaDescription || post.excerpt,
       images: [featuredImage],
     },
   };
 }
 
-// --- FIX 2: Use an inline type for the function props ---
 export default async function BlogPostPage(
-  { params }: { params: { slug: string } }
+  { params }: { params: Promise<{ slug: string }> }
 ) {
-  const { slug } = params;
+  const { slug } = await params;
   const post = await getPostBySlug(slug);
-  const latestPosts: Post[] = await getLatestPosts(3);
-  const categories: Category[] = await getCategories();
-  const featuredImage = post._embedded['wp:featuredmedia']?.[0]?.source_url || '/default-banner.jpg';
-  const wordCount = post.content.rendered.split(/\s+/).length;
-  const readingTime = Math.ceil(wordCount / 200);
-  const postUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/blog/${post.slug}`;
+
+  if (!post) {
+    return (
+      <div className="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
+          <Link href="/blog" className="text-blue-400 hover:text-blue-300">
+            Back to Blog
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  const latestPosts = await getLatestPosts(3);
+  const categories = await getCategories();
+  const featuredImage = post.image || '/images/portfolio-1.jpg';
+  const readingTime = calculateReadingTime(post.content);
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://askylinedigital.com';
+  const postUrl = `${siteUrl}/blog/${post.slug}`;
 
   return (
     <article className="bg-gray-900 text-white min-h-screen transition-colors duration-300">
@@ -91,7 +75,7 @@ export default async function BlogPostPage(
       <div className="relative h-64 md:h-96">
         <Image
           src={featuredImage}
-          alt={post.title.rendered}
+          alt={post.title}
           className="object-cover w-full h-full"
           fill
           priority
@@ -123,35 +107,44 @@ export default async function BlogPostPage(
               </span>
               <span className="w-1 h-1 bg-gray-400 rounded-full" />
               <span>{readingTime} min read</span>
+              <span className="w-1 h-1 bg-gray-400 rounded-full" />
+              <span className="px-2 py-1 bg-gray-800 rounded text-xs">{post.category}</span>
             </div>
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6">{post.title}</h1>
 
-            {post._embedded?.author?.[0] && (
-              <div className="flex items-center gap-3 mt-6">
-                {post._embedded.author[0].avatar_urls?.['48'] && (
-                   <Image
-                      src={post._embedded.author[0].avatar_urls['48']}
-                      alt={post._embedded.author[0].name}
-                      className="w-10 h-10 rounded-full object-cover"
-                      width={40}
-                      height={40}
-                   />
-                )}
-                <div>
-                  <p className="font-medium">{post._embedded.author[0].name}</p>
-                  {post._embedded.author[0].description && (
-                    <p className="text-sm text-gray-400">
-                      {post._embedded.author[0].description}
-                    </p>
-                  )}
-                </div>
+            <div className="flex items-center gap-3 mt-6">
+              {post.author.avatar && (
+                <Image
+                  src={post.author.avatar}
+                  alt={post.author.name}
+                  className="w-10 h-10 rounded-full object-cover"
+                  width={40}
+                  height={40}
+                />
+              )}
+              <div>
+                <p className="font-medium">{post.author.name}</p>
+                <p className="text-sm text-gray-400">{post.author.email}</p>
               </div>
-            )}
+            </div>
           </header>
 
-          <div className={`${styles.content} max-w-none`} dangerouslySetInnerHTML={{ __html: post.content.rendered }} />
+          <div className={`${styles.content} max-w-none prose prose-invert prose-lg`} dangerouslySetInnerHTML={{ __html: post.content }} />
 
-          <SocialShare title={post.title.rendered} url={postUrl} />
+          {post.tags && post.tags.length > 0 && (
+            <div className="mt-8 flex flex-wrap gap-2">
+              {post.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm"
+                >
+                  #{tag}
+                </span>
+              ))}
+            </div>
+          )}
+
+          <SocialShare title={post.title} url={postUrl} />
 
           <div className="mt-16 pt-8 border-t border-gray-700">
             <Link
@@ -177,22 +170,19 @@ export default async function BlogPostPage(
                 >
                   <div className="flex gap-4 items-center">
                     <div className="w-20 h-20 bg-gray-700 rounded-md overflow-hidden flex-shrink-0">
-                      {latestPost._embedded['wp:featuredmedia']?.[0]?.source_url && (
-                        <Image
-                          src={latestPost._embedded['wp:featuredmedia'][0].source_url}
-                          alt={latestPost.title.rendered}
-                          className="object-cover w-full h-full"
-                          width={80}
-                          height={80}
-                          loading="lazy"
-                        />
-                      )}
+                      <Image
+                        src={latestPost.image}
+                        alt={latestPost.title}
+                        className="object-cover w-full h-full"
+                        width={80}
+                        height={80}
+                        loading="lazy"
+                      />
                     </div>
                     <div>
-                      <h4
-                        className="font-medium group-hover:text-blue-400 transition"
-                        dangerouslySetInnerHTML={{ __html: latestPost.title.rendered }}
-                      />
+                      <h4 className="font-medium group-hover:text-blue-400 transition line-clamp-2">
+                        {latestPost.title}
+                      </h4>
                       <p className="text-sm text-gray-400 mt-1">
                         {new Date(latestPost.date).toLocaleDateString('en-US', {
                           month: 'short',
@@ -211,8 +201,8 @@ export default async function BlogPostPage(
             <div className="space-y-2">
               {categories.map((category) => (
                 <Link
-                  key={category.id}
-                  href={`/blog/category/${category.slug}`}
+                  key={category.slug}
+                  href={`/blog?category=${category.slug}`}
                   className="flex justify-between items-center px-3 py-2 bg-gray-700 hover:bg-gray-600 rounded transition"
                 >
                   <span className="capitalize">{category.name}</span>
@@ -230,10 +220,9 @@ export default async function BlogPostPage(
   );
 }
 
-
 export async function generateStaticParams() {
-  const posts: Post[] = await getPosts();
-  return posts.map((post: Post) => ({
+  const { posts } = await getPosts(1, 1000); // Get all posts for static generation
+  return posts.map((post) => ({
     slug: post.slug,
   }));
 }

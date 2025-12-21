@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "slug": "the-future-of-web-development-2024",
+    "title": "The Future of Web Development: What to Expect in 2024",
+    "excerpt": "Explore the latest trends and technologies shaping the future of web development, including AI integration, serverless architecture, and modern frameworks.",
+    "content": "<h2>Introduction</h2><p>Web development continues to evolve at a rapid pace, with new technologies and frameworks emerging regularly. In 2024, we're seeing significant shifts toward AI-powered development tools, serverless architectures, and enhanced user experiences.</p><h2>Key Trends</h2><h3>1. AI Integration</h3><p>Artificial Intelligence is revolutionizing how developers write code. Tools like GitHub Copilot and ChatGPT are becoming essential parts of the development workflow.</p><h3>2. Serverless Architecture</h3><p>Serverless computing is gaining traction, allowing developers to focus on code without managing infrastructure. Platforms like Vercel and AWS Lambda are leading this movement.</p><h3>3. Modern Frameworks</h3><p>Next.js, React, and Vue.js continue to dominate, with improvements in performance, SEO, and developer experience.</p><h2>Conclusion</h2><p>The future of web development is exciting, with tools and technologies that make development faster, more efficient, and more accessible to everyone.</p>",
+    "author": {
+      "name": "Michael Chen",
+      "email": "michael@askylinedigital.com",
+      "avatar": "/images/profile.png"
+    },
+    "date": "2024-03-15",
+    "updatedAt": "2024-03-15",
+    "category": "Web Development",
+    "tags": [
+      "Web Development",
+      "Technology",
+      "Trends"
+    ],
+    "image": "/images/portfolio-1.jpg",
+    "featured": true,
+    "published": true,
+    "seo": {
+      "metaTitle": "The Future of Web Development: What to Expect in 2024",
+      "metaDescription": "Explore the latest trends and technologies shaping the future of web development, including AI integration, serverless architecture, and modern frameworks.",
+      "keywords": "web development, technology trends, AI, serverless, Next.js, React"
+    }
+  },
+  {
+    "id": 2,
+    "slug": "maximizing-seo-strategy-better-rankings",
+    "title": "Maximizing Your SEO Strategy for Better Rankings",
+    "excerpt": "Learn effective SEO techniques to improve your website's visibility and rankings. Discover proven strategies for on-page optimization, content marketing, and technical SEO.",
+    "content": "<h2>Introduction</h2><p>Search Engine Optimization (SEO) remains one of the most critical aspects of digital marketing. A well-executed SEO strategy can significantly improve your website's visibility and drive organic traffic.</p><h2>On-Page SEO</h2><p>On-page SEO involves optimizing individual web pages to rank higher. This includes optimizing title tags, meta descriptions, headers, and content quality.</p><h2>Content Marketing</h2><p>High-quality, relevant content is the foundation of good SEO. Regularly publishing valuable content helps establish authority and improves search rankings.</p><h2>Technical SEO</h2><p>Technical SEO ensures your website is crawlable and indexable by search engines. This includes site speed, mobile responsiveness, and proper URL structure.</p><h2>Conclusion</h2><p>Implementing a comprehensive SEO strategy requires time and effort, but the long-term benefits are substantial for your online presence.</p>",
+    "author": {
+      "name": "Sarah Johnson",
+      "email": "sarah@askylinedigital.com",
+      "avatar": "/images/profile.png"
+    },
+    "date": "2024-03-10",
+    "updatedAt": "2024-03-10",
+    "category": "SEO",
+    "tags": [
+      "SEO",
+      "Digital Marketing",
+      "Content Strategy"
+    ],
+    "image": "/images/portfolio-2.jpg",
+    "featured": true,
+    "published": true,
+    "seo": {
+      "metaTitle": "Maximizing Your SEO Strategy for Better Rankings",
+      "metaDescription": "Learn effective SEO techniques to improve your website's visibility and rankings. Discover proven strategies for on-page optimization, content marketing, and technical SEO.",
+      "keywords": "SEO, search engine optimization, digital marketing, content strategy"
+    }
+  },
+  {
+    "id": 3,
+    "slug": "mobile-app-development-native-vs-cross-platform",
+    "title": "Mobile App Development: Native vs Cross-Platform",
+    "excerpt": "A comprehensive comparison of native and cross-platform mobile development approaches. Understand the pros and cons of each method to make informed decisions for your next project.",
+    "content": "<h2>Introduction</h2><p>When developing a mobile application, one of the first decisions you'll face is whether to build a native app or use a cross-platform framework. Both approaches have their advantages and disadvantages.</p><h2>Native Development</h2><p>Native apps are built specifically for one platform (iOS or Android) using platform-specific languages and tools. They offer the best performance and access to platform-specific features.</p><h3>Pros:</h3><ul><li>Superior performance</li><li>Full access to device features</li><li>Better user experience</li><li>Platform-specific UI/UX</li></ul><h3>Cons:</h3><ul><li>Higher development cost</li><li>Separate codebases for each platform</li><li>Longer development time</li></ul><h2>Cross-Platform Development</h2><p>Cross-platform frameworks like React Native, Flutter, and Xamarin allow you to write code once and deploy to multiple platforms.</p><h3>Pros:</h3><ul><li>Single codebase</li><li>Faster development</li><li>Lower cost</li><li>Easier maintenance</li></ul><h3>Cons:</h3><ul><li>Performance limitations</li><li>Limited access to native features</li><li>Platform-specific bugs</li></ul><h2>Conclusion</h2><p>The choice between native and cross-platform development depends on your project requirements, budget, and timeline. Consider all factors before making a decision.</p>",
+    "author": {
+      "name": "David Kim",
+      "email": "david@askylinedigital.com",
+      "avatar": "/images/profile.png"
+    },
+    "date": "2024-03-05",
+    "updatedAt": "2024-03-05",
+    "category": "Mobile Development",
+    "tags": [
+      "Mobile Development",
+      "App Development",
+      "Technology"
+    ],
+    "image": "/images/portfolio-3.jpg",
+    "featured": false,
+    "published": true,
+    "seo": {
+      "metaTitle": "Mobile App Development: Native vs Cross-Platform",
+      "metaDescription": "A comprehensive comparison of native and cross-platform mobile development approaches. Understand the pros and cons of each method.",
+      "keywords": "mobile app development, native apps, cross-platform, React Native, Flutter"
+    }
+  },
+  {
+    "slug": "the-secret-life-of-javascript-why-asynchrony-is-the-engine-of-the-web",
+    "title": "The Secret Life of JavaScript: Why Asynchrony is the Engine of the Web",
+    "excerpt": "think JavaScript is just a single-threaded language? Think again. Go under the hood to discover how the Event Loop, Promises, and Async/Await allow JavaScript to multitask without breaking a sweat",
+    "content": "<h1>The Secret Life of JavaScript: Asynchrony in Detail</h1>\n\n<p>JavaScript looks synchronous but behaves asynchronously behind the scenes. Understanding this secret life is essential for writing reliable and high-performance applications.</p>\n\n<h2>JavaScript Is Single-Threaded</h2>\n<p>JavaScript runs on one thread and executes one task at a time using a call stack.</p>\n\n<pre><code>\nconsole.log(\"A\");\nconsole.log(\"B\");\nconsole.log(\"C\");\n</code></pre>\n\n<h2>The Problem with Blocking Code</h2>\n<p>Blocking code freezes the browser and must be avoided.</p>\n\n<pre><code>\nfunction blockFor5Seconds() {\n  const end = Date.now() + 5000;\n  while (Date.now() < end) {}\n}\n</code></pre>\n\n<h2>The JavaScript Runtime</h2>\n<ul>\n  <li>Call Stack</li>\n  <li>Web APIs</li>\n  <li>Callback Queue</li>\n  <li>Microtask Queue</li>\n  <li>Event Loop</li>\n</ul>\n\n<h2>Web APIs and setTimeout</h2>\n\n<pre><code>\nsetTimeout(() => {\n  console.log(\"Hello\");\n}, 2000);\n</code></pre>\n\n<h2>Microtasks vs Callbacks</h2>\n\n<pre><code>\nPromise.resolve().then(() => console.log(\"Promise\"));\nsetTimeout(() => console.log(\"Timeout\"), 0);\n</code></pre>\n\n<h2>Async/Await</h2>\n\n<pre><code>\nasync function loadData() {\n  try {\n    const data = await fetchData();\n    console.log(data);\n  } catch (err) {\n    console.error(err);\n  }\n}\n</code></pre>\n\n<h2>Parallel Execution</h2>\n\n<pre><code>\nawait Promise.all([\n  fetchUser(),\n  fetchOrders()\n]);\n</code></pre>\n\n<h2>Conclusion</h2>\n<p>Understanding the Event Loop unlocks the true power of JavaScript asynchrony.</p>\n",
+    "author": {
+      "name": "Admin",
+      "email": "admin@askylinedigital.com",
+      "avatar": "/images/profile.png"
+    },
+    "category": "Web Development",
+    "tags": [],
+    "image": "/images/portfolio-1.jpg",
+    "featured": true,
+    "published": true,
+    "seo": {
+      "metaTitle": "The Secret Life of JavaScript: Why Asynchrony is the Engine of the Web",
+      "metaDescription": "hink JavaScript is just a single-threaded language? Think again. Go under the hood to discover how the Event Loop, Promises, and Async/Await allow JavaScript to multitask without breaking a sweat",
+      "keywords": " JavaScript ,Web Development ,Programming Basics, Frontend"
+    },
+    "id": 4,
+    "date": "2025-12-21",
+    "updatedAt": "2025-12-21"
+  }
+]
