@@ -33,20 +33,41 @@ export function PortfolioGrid() {
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -8, scale: 1.03 }}
+              transition={{ 
+                duration: 0.5, 
+                delay: index * 0.1,
+                type: "spring",
+                stiffness: 300,
+                damping: 20
+              }}
               viewport={{ once: true }}
-              className="block bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all border border-gray-700 hover:border-gray-600 hover:scale-[1.02]"
+              className="block bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-700 hover:border-purple-500/50 group relative"
             >
-              <div className="relative h-48">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/70 via-gray-900/30 to-transparent" />
+              <div className="relative h-48 overflow-hidden">
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover"
+                  />
+                </motion.div>
+                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent group-hover:from-purple-900/60 group-hover:via-blue-900/40 transition-all duration-300" />
+                <motion.div
+                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  initial={{ scale: 0.8 }}
+                  whileHover={{ scale: 1 }}
+                >
+                  <div className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-lg border border-white/20">
+                    <span className="text-white font-semibold">View Project</span>
+                  </div>
+                </motion.div>
               </div>
               <div className="p-6">
                 <div className="text-sm text-blue-400 font-medium mb-2">

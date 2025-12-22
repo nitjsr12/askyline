@@ -43,39 +43,48 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8 }}
           >
-            <a href="/services" className="group relative overflow-hidden">
+            <motion.a 
+              href="/services" 
+              className="group relative overflow-hidden inline-block"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <Button
                 size="lg"
-                className="relative z-10 flex items-center gap-2"
+                className="relative z-10 flex items-center gap-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <Rocket className="w-4 h-4 transition-transform group-hover:rotate-12" />
+                <motion.div
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                >
+                  <Rocket className="w-4 h-4" />
+                </motion.div>
                 Explore Our Services 
+                <motion.span
+                  className="ml-2"
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 2 }}
+                >
+                  →
+                </motion.span>
               </Button>
-              <motion.span 
-                className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500"
-                initial={{ opacity: 1 }}
-                whileHover={{
-                  opacity: 0.9,
-                  background: [
-                    'linear-gradient(to right, #8b5cf6, #3b82f6)',
-                    'linear-gradient(to right, #3b82f6, #8b5cf6)'
-                  ],
-                  transition: { duration: 0.5 }
-                }}
-              />
-            </a>
+            </motion.a>
 
-            <a href="/contact" className="group relative overflow-hidden">
+            <motion.a 
+              href="/contact" 
+              className="group relative overflow-hidden inline-block"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
               <Button
                 variant="outline"
                 size="lg"
-                className="relative z-10 flex items-center gap-2 hover:bg-gray-800/50"
+                className="relative z-10 flex items-center gap-2 border-2 border-purple-500/50 hover:border-purple-500 text-white hover:bg-purple-500/10 backdrop-blur-sm transition-all duration-300"
               >
-                <MessageCircle className="w-4 h-4 transition-transform group-hover:rotate-12" />
+                <MessageCircle className="w-4 h-4" />
                 Get in Touch
               </Button>
-              <span className="absolute inset-0 bg-gradient-to-r from-gray-800/50 to-gray-800/50 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </a>
+            </motion.a>
         </motion.div>
 
 

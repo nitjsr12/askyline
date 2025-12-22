@@ -4,11 +4,26 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { Rocket, MessageCircle, Sparkles, Users, Code, Globe, Workflow } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function AboutUs() {
   const count = useMotionValue(0);
   const rounded = useTransform(count, Math.round);
+  const [particles, setParticles] = useState<Array<{ left: number; top: number; duration: number; x: number; y: number }>>([]);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    // Generate particle positions only on client
+    const particleData = Array.from({ length: 15 }, () => ({
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      duration: Math.random() * 10 + 10,
+      x: Math.random() * 100 - 50,
+      y: Math.random() * 100 - 50,
+    }));
+    setParticles(particleData);
+  }, []);
 
   useEffect(() => {
     const animation = animate(count, 50, { duration: 3 });
@@ -57,31 +72,36 @@ export default function AboutUs() {
         />
 
         {/* Floating Particles */}
-        {[...Array(15)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 rounded-full bg-purple-400"
-            initial={{
-              x: Math.random() * 100 - 50,
-              y: Math.random() * 100 - 50,
-              opacity: 0
-            }}
-            animate={{
-              x: Math.random() * 100 - 50,
-              y: Math.random() * 100 - 50,
-              opacity: [0, 0.5, 0],
-            }}
-            transition={{
-              duration: Math.random() * 10 + 10,
-              repeat: Infinity,
-              repeatType: "reverse"
-            }}
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
+        {mounted && particles.map((particle, i) => {
+          const targetX = particle.x + (Math.sin(i) * 20);
+          const targetY = particle.y + (Math.cos(i) * 20);
+          return (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 rounded-full bg-purple-400"
+              initial={{
+                x: particle.x,
+                y: particle.y,
+                opacity: 0
+              }}
+              animate={{
+                x: [particle.x, targetX, particle.x],
+                y: [particle.y, targetY, particle.y],
+                opacity: [0, 0.5, 0],
+              }}
+              transition={{
+                duration: particle.duration,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut"
+              }}
+              style={{
+                left: `${particle.left}%`,
+                top: `${particle.top}%`,
+              }}
+            />
+          );
+        })}
       </div>
 
       {/* Content Container */}

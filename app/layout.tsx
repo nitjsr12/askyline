@@ -6,6 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Analytics } from '@vercel/analytics/next';
 import { GA_TRACKING_ID } from '@/lib/gtag';
 import Script from 'next/script';
+import { SmoothScroll } from '@/components/SmoothScroll';
 <meta name="google-site-verification" content="r3jko59OeBJBP-PYhP5H2AzMR66DkZBuFf3pb-OjnVU" />
 
 const poppins = Poppins({ 
@@ -65,10 +66,12 @@ export default function RootLayout({
         />
       </head>
       <body className={`${poppins.variable} ${openSans.variable} font-body`}>
-        <Header />
-        {children}
-        <Analytics />
-        <Footer />
+        <SmoothScroll>
+          <Header />
+          {children}
+          <Analytics />
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );
