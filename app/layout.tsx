@@ -7,6 +7,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { GA_TRACKING_ID } from '@/lib/gtag';
 import Script from 'next/script';
 import { SmoothScroll } from '@/components/SmoothScroll';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
 <meta name="google-site-verification" content="r3jko59OeBJBP-PYhP5H2AzMR66DkZBuFf3pb-OjnVU" />
 
 const poppins = Poppins({ 
@@ -21,16 +22,16 @@ const openSans = Open_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'Askylinedigital - Web Development & Digital Marketing Agency',
-  description: 'Professional web development, app development, SEO, and digital marketing services to help your business grow.',
-  keywords: 'web development, app development, digital marketing, SEO, online marketing, web design, eCommerce development',
-  metadataBase: new URL('https://askylinedigital.com'),
+  title: 'Digital Marketing Agency in India | More Leads & Sales | Askyline',
+  description: 'Help Indian SMEs get 3-5x more leads through smart website development & digital marketing. Free Growth Audit. Transparent pricing. Results-focused. ✓',
+  keywords: 'digital marketing agency in India, website development company, SEO services for small businesses, Google Ads management India, digital marketing Bangalore',
+  metadataBase: new URL('https://askylinedigital.com'), 
   other: {
     'google-site-verification': 'r3jko59OeBJBP-PYhP5H2AzMR66DkZBuFf3pb-OjnVU',
   },
   openGraph: {
-    title: 'Askylinedigital - Web Development & Digital Marketing Agency',
-    description: 'Professional web development, app development, SEO, and digital marketing services to help your business grow.',
+    title: 'Digital Marketing Agency in India | More Leads & Sales | Askyline',
+    description: 'Help Indian SMEs get 3-5x more leads through smart website development & digital marketing. Free Growth Audit. Transparent pricing.',
     url: 'https://askylinedigital.com',
     siteName: 'Askylinedigital',
   }
@@ -67,10 +68,11 @@ export default function RootLayout({
       </head>
       <body className={`${poppins.variable} ${openSans.variable} font-body`}>
         <SmoothScroll>
-          <Header />
-          {children}
-          <Analytics />
-          <Footer />
+        <Header />
+        {children}
+        <WhatsAppButton />
+        <Analytics />
+        <Footer />
         </SmoothScroll>
       </body>
     </html>

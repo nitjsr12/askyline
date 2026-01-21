@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export function NewsletterSection() {
   return (
-    <section id="newsletter" className="py-24 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <section id="newsletter" className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
       <div className="container mx-auto px-6">
         {/* Section Content */}
         <motion.div

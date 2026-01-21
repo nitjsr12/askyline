@@ -6,14 +6,14 @@ import { portfolioItems } from "@/lib/constants/portfolio";
 
 export function PortfolioGrid() {
   return (
-    <section className="py-20 bg-gray-900">
+    <section className="py-16 bg-gray-900">
       <div className="container mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16 max-w-3xl mx-auto"
+          className="text-center mb-12 max-w-3xl mx-auto"
         >
           <span className="inline-block px-4 py-2 bg-gray-800 rounded-full text-blue-400 text-sm font-medium mb-4">
             Our Work
@@ -51,12 +51,12 @@ export function PortfolioGrid() {
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.5 }}
                 >
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover"
-                  />
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover"
+                />
                 </motion.div>
                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/40 to-transparent group-hover:from-purple-900/60 group-hover:via-blue-900/40 transition-all duration-300" />
                 <motion.div

@@ -26,7 +26,7 @@ const reviews = [
 
 export function ReviewsSection() {
   return (
-    <section id="reviews" className="py-24 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
+    <section id="reviews" className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white">
       <div className="container mx-auto px-6">
         {/* Section Heading */}
         <motion.div
@@ -34,7 +34,7 @@ export function ReviewsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="text-center max-w-2xl mx-auto mb-12"
         >
           <h2 className="font-heading text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500">
             What Our Clients Say

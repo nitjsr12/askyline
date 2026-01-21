@@ -196,7 +196,7 @@ export function FAQS() {
   ];
 
   return (
-    <section id="faq" className="py-24 bg-gradient-to-b from-gray-900 to-gray-800 text-white relative overflow-hidden">
+    <section id="faq" className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white relative overflow-hidden">
       {/* Decorative blobs */}
       <div className="absolute top-0 left-0 w-full h-full opacity-20">
         <div className="absolute top-20 left-10 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>

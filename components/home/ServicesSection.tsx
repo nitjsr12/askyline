@@ -11,38 +11,38 @@ import { useEffect } from "react";
 const services = [
   {
     icon: Globe,
-    title: "Web Development",
-    description: "Custom websites with modern frameworks for optimal performance.",
+    title: "Website Development",
+    description: "A website that converts visitors into customers (not just looks good). Outcome: 3-5x more inquiries. Mobile-responsive, fast loading, SEO-ready. Starting at ₹50,000.",
     hoverColor: "from-purple-500 to-indigo-500"
   },
   {
-    icon: Layout,
-    title: "WordPress Websites",
-    description: "Fast, secure WordPress sites with custom themes and plugins.",
-    hoverColor: "from-blue-500 to-cyan-500"
-  },
-  {
-    icon: ShoppingCart,
-    title: "Shopify Stores",
-    description: "Beautiful e-commerce stores that convert visitors to customers.",
-    hoverColor: "from-green-500 to-teal-500"
-  },
-  {
-    icon: Smartphone,
-    title: "Mobile Apps",
-    description: "Cross-platform apps for iOS and Android.",
-    hoverColor: "from-orange-500 to-amber-500"
-  },
-  {
     icon: LineChart,
-    title: "SEO & Marketing",
-    description: "Strategies to boost your online visibility and traffic.",
+    title: "SEO Services",
+    description: "Your business appears on Google when customers search for what you sell. Outcome: 10-50 qualified leads per month without ads. Keyword research, on-page SEO, monthly reports. Starting at ₹15,000/month.",
     hoverColor: "from-red-500 to-pink-500"
   },
   {
-    icon: Server,
-    title: "Cloud Solutions",
-    description: "Scalable cloud infrastructure for your business.",
+    icon: Rocket,
+    title: "Google Ads / Meta Ads",
+    description: "Pay only when someone clicks. Guaranteed visibility when customers are searching. Outcome: 20-100 leads per month. Track every rupee spent. Starting at ₹10,000/month ad spend + ₹5,000 management fee.",
+    hoverColor: "from-blue-500 to-cyan-500"
+  },
+  {
+    icon: Layout,
+    title: "Complete Digital Marketing",
+    description: "End-to-end online strategy that brings customers to your door. Website optimization + SEO + Social Media + Ads. Outcome: 2-5x increase in online inquiries and sales. Starting at ₹20,000/month.",
+    hoverColor: "from-green-500 to-teal-500"
+  },
+  {
+    icon: ShoppingCart,
+    title: "E-Commerce Development",
+    description: "Beautiful online stores that convert visitors to paying customers. Secure payment, inventory management, mobile-responsive. Shopify, WooCommerce, or custom. Starting at ₹1,50,000.",
+    hoverColor: "from-orange-500 to-amber-500"
+  },
+  {
+    icon: Smartphone,
+    title: "Mobile App Development",
+    description: "Native iOS/Android apps or cross-platform solutions that engage your customers. App Store optimization, push notifications, secure payments. Outcome: 40-60% increase in customer engagement. Starting at ₹2,00,000.",
     hoverColor: "from-yellow-500 to-lime-500"
   }
 ];
@@ -72,7 +72,7 @@ export function ServicesSection() {
   };
 
   return (
-    <section id="services" className="py-20 bg-gray-900 text-white">
+    <section id="services" className="py-16 bg-gray-900 text-white">
       <div className="container mx-auto px-6">
         {/* Header */}
         <motion.div
@@ -80,7 +80,7 @@ export function ServicesSection() {
           initial="hidden"
           animate={controls}
           variants={container}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-12"
         >
           <motion.div variants={item} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 mb-6">
             <Rocket className="w-4 h-4 text-purple-400" />
@@ -89,12 +89,12 @@ export function ServicesSection() {
 
           <motion.h2 variants={item} className="text-4xl font-bold mb-6">
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
-              Digital Solutions
+              How We Help You Get More Customers
             </span>
           </motion.h2>
 
           <motion.p variants={item} className="text-gray-300">
-            Comprehensive services to build and grow your online presence.
+            Every service is designed to bring you more customers, not just more traffic. Clear outcomes, transparent pricing, results-focused approach.
           </motion.p>
         </motion.div>
 
@@ -143,23 +143,32 @@ export function ServicesSection() {
         >
           <motion.div variants={item} className="space-y-6">
             <h3 className="text-2xl font-semibold">
-              Ready to start your project?
+              Ready to Get More Leads for Your Business?
             </h3>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              Every successful business started with a single step. Yours can start with a <strong className="text-purple-400">Free 30-Minute Growth Audit</strong>. No sales pitch, just honest value.
+            </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <motion.button
+              <motion.a
+                href="/contact"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
-                className="px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 text-white font-medium"
+                className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-xs sm:text-sm md:text-base rounded-lg bg-gradient-to-r from-purple-500 to-blue-500 text-white font-semibold shadow-lg hover:shadow-purple-500/30 transition-all"
               >
-                Get Free Quote
-              </motion.button>
-              <motion.button
+                <span className="hidden sm:inline">Get Free Growth Audit</span>
+                <span className="sm:hidden">Free Audit</span>
+              </motion.a>
+              <motion.a
+                href="https://wa.me/917256889395?text=Hi,%20I%27m%20interested%20in%20your%20Free%20Growth%20Audit"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
-                className="px-6 py-3 rounded-lg bg-gray-800 border border-gray-700 text-white font-medium"
+                className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-xs sm:text-sm md:text-base rounded-lg bg-gray-800 border-2 border-green-500/50 hover:border-green-500 text-white font-semibold transition-all"
               >
-                View Portfolio
-              </motion.button>
+                <span className="hidden sm:inline">Chat on WhatsApp</span>
+                <span className="sm:hidden">WhatsApp</span>
+              </motion.a>
             </div>
           </motion.div>
         </motion.div>

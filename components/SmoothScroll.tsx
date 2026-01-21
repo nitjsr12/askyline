@@ -5,6 +5,11 @@ import Lenis from "lenis";
 
 export function SmoothScroll({ children }: { children: React.ReactNode }) {
   useEffect(() => {
+    // Disable Lenis on small screens to avoid issues with fixed elements
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -22,17 +27,6 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     }
 
     requestAnimationFrame(raf);
-
-    // Handle hash links
-    lenis.on("scroll", () => {
-      const hash = window.location.hash;
-      if (hash) {
-        const element = document.querySelector(hash) as HTMLElement;
-        if (element) {
-          lenis.scrollTo(element, { offset: -100 });
-        }
-      }
-    });
 
     return () => {
       lenis.destroy();

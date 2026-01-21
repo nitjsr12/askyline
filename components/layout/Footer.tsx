@@ -55,9 +55,9 @@ export function Footer() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                <Image src="/images/askyline.png" alt="Logo" width={200} height={50} />
+            <Image src="/images/askyline.png" alt="Logo" width={200} height={50} />
               </motion.div>
-            </Link>
+          </Link>
             <p className="opacity-80 text-sm leading-relaxed">
               Elevating businesses through innovative digital solutions and strategic growth. Let&apos;s build the future together.
             </p>
@@ -137,10 +137,10 @@ export function Footer() {
                   transition={{ delay: 0.5 + index * 0.1, type: "spring" }}
                 >
                   <Link
-                    href={social.href}
-                    className="opacity-80 hover:opacity-100 transition-opacity"
-                    aria-label={social.name}
-                  >
+                  href={social.href}
+                  className="opacity-80 hover:opacity-100 transition-opacity"
+                  aria-label={social.name}
+                >
                     <motion.div
                       whileHover={{ scale: 1.2, rotate: 360 }}
                       whileTap={{ scale: 0.9 }}
@@ -149,7 +149,7 @@ export function Footer() {
                     >
                       <social.icon className="h-6 w-6 text-gray-300 hover:text-white transition-colors" />
                     </motion.div>
-                  </Link>
+                </Link>
                 </motion.div>
               ))}
             </div>

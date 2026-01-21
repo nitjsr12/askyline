@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export function FounderMessage() {
   return (
-    <section className="py-24 bg-gradient-to-b from-gray-800 to-gray-900 text-white">
+    <section className="py-20 bg-gradient-to-b from-gray-800 to-gray-900 text-white">
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column: Image */}

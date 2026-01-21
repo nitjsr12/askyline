@@ -71,39 +71,39 @@ export function FAQSection() {
 
   const faqs: FAQItem[] = [
     {
-      question: 'What kind of services does Askyline Digital provide?',
+      question: 'How much does it cost to build a website?',
       answer:
-        'We offer full-service tech and digital marketing solutions, including custom web development, mobile app development, and performance-driven SEO and digital marketing. Everything we build is modern, scalable, and tailored to your business needs.',
+        'Our website development starts at ₹50,000 for a basic business website (5-7 pages). E-commerce websites start at ₹1,50,000. We provide transparent pricing upfront – no hidden costs. Payment plans available for startups.',
     },
     {
-      question: 'Which technologies do you specialize in?',
+      question: 'How long does it take to see results from SEO?',
       answer:
-        'We work with the latest technologies to deliver high-performing products. Our web solutions use React.js, Next.js, Node.js, and Python. For apps, we build native and cross-platform apps using React Native and Flutter. All our solutions are optimized for performance, SEO, and user experience.',
+        'SEO is a long-term strategy. You\'ll typically see initial improvements in 2-3 months, and significant ranking improvements in 4-6 months. However, the results compound over time. Most of our clients see 2-3x more organic traffic within 6 months.',
     },
     {
-      question: 'Can you develop e-commerce websites or apps?',
+      question: 'What\'s included in the Free Growth Audit?',
       answer:
-        'Yes! We build e-commerce platforms using Shopify, WooCommerce, and custom solutions. Whether you need an online store, a product catalogue, or secure payment integration, we\'ve got you covered.',
+        'We review your website, current online presence, and business goals. Then we send you a detailed PDF report within 24 hours with: website performance analysis, SEO opportunities you\'re missing, quick wins to get more leads, recommendations specific to your business. No sales pitch, just honest value.',
     },
     {
-      question: 'Do you offer SEO and digital marketing along with development?',
+      question: 'Do you work with small businesses?',
       answer:
-        'Absolutely. We provide comprehensive SEO services from technical SEO and keyword strategy to content marketing and local SEO. Our digital marketing services include PPC campaigns, social media marketing, and conversion rate optimization to drive measurable results.',
+        'Yes! In fact, most of our clients are SMEs and startups. We offer startup-friendly pricing and payment plans. We believe every business, regardless of size, deserves professional digital marketing.',
     },
     {
-      question: 'How is pricing determined for projects?',
+      question: 'What makes you different from other agencies?',
       answer:
-        'Our pricing is flexible and based on your project\'s complexity, features, and timeline. Since we\'re a new agency, we\'re offering startup-friendly pricing to build lasting client relationships. Reach out for a free quote tailored to your needs.',
+        'We\'re founder-led, transparent, and results-focused. No fancy buzzwords. We care about your revenue, not our portfolio. Plus, direct access to decision-maker means faster responses and real accountability.',
     },
     {
-      question: 'Can you improve or scale my existing website or app?',
+      question: 'Do you provide ongoing support?',
       answer:
-        'Yes! Whether you need a performance audit, feature enhancements, better SEO, or a full redesign, we can help upgrade your current digital product without starting from scratch.',
+        'Yes! We offer monthly maintenance packages starting at ₹5,000/month. This includes website updates, security monitoring, backups, and basic content changes. You can also reach us on WhatsApp for urgent issues.',
     },
   ];
 
   return (
-    <section id="faq" className="py-24 bg-gradient-to-b from-gray-900 to-gray-800 text-white relative overflow-hidden">
+    <section id="faq" className="py-20 bg-gradient-to-b from-gray-900 to-gray-800 text-white relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-0 left-0 w-full h-full opacity-20">
         <div className="absolute top-20 left-10 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
@@ -120,11 +120,11 @@ export function FAQSection() {
           className="max-w-4xl mx-auto"
         >
           <h2 className="font-heading text-4xl md:text-5xl font-bold mb-6 text-center bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-blue-400">
-            Frequently Asked Questions
+            Frequently Asked Questions About Our Services
           </h2>
           
           <p className="text-center text-gray-300 mb-12 max-w-2xl mx-auto text-lg">
-            Can't find what you're looking for? We're here to help answer any questions you might have.
+            Got questions? We've got answers. Can't find what you're looking for? Chat with us on WhatsApp or get your Free Growth Audit.
           </p>
 
           <FAQItems 
@@ -142,9 +142,19 @@ export function FAQSection() {
           >
             <a
               href="/contact"
-              className="px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-xl hover:shadow-lg hover:shadow-purple-500/30 transition-all hover:scale-[1.02] text-center"
+              className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-xs sm:text-sm md:text-base bg-gradient-to-r from-purple-600 to-blue-600 text-white font-medium rounded-xl hover:shadow-lg hover:shadow-purple-500/30 transition-all hover:scale-[1.02] text-center"
             >
-              Contact Us 
+              <span className="hidden sm:inline">Get Free Growth Audit</span>
+              <span className="sm:hidden">Free Audit</span>
+            </a>
+            <a
+              href="https://wa.me/917256889395?text=Hi,%20I%20have%20a%20question"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-xs sm:text-sm md:text-base bg-gray-800 border-2 border-green-500/50 hover:border-green-500 text-white font-medium rounded-xl hover:shadow-lg transition-all hover:scale-[1.02] text-center"
+            >
+              <span className="hidden sm:inline">Chat on WhatsApp</span>
+              <span className="sm:hidden">WhatsApp</span>
             </a>
           </motion.div>
         </motion.div>

@@ -64,9 +64,7 @@ export function MissionVision() {
               </h2>
               
               <p className="text-gray-300 leading-relaxed">
-                To empower businesses with innovative digital solutions that drive growth,
-                enhance efficiency, and create lasting value. We are committed to delivering
-                excellence through cutting-edge technology and strategic thinking.
+                We exist to help Indian SMEs and startups get more customers through smart digital marketing. No fluff, no fancy jargon – just real results that matter to your bottom line.
               </p>
               <motion.div
                 whileHover={{ x: 5 }}
@@ -98,13 +96,11 @@ export function MissionVision() {
               </div>
               
               <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-purple-300">
-                Our Vision
+                Why We're Different
               </h2>
               
               <p className="text-gray-300 leading-relaxed">
-                To be the leading force in digital transformation, recognized globally
-                for our innovative solutions, exceptional service, and the measurable
-                success we bring to our clients businesses.
+                We're results-focused, not portfolio-focused. Other agencies want impressive case studies. We want YOUR business to succeed. We measure success by YOUR revenue, not our awards.
               </p>
               <motion.div
                 whileHover={{ x: 5 }}

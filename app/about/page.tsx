@@ -7,16 +7,16 @@ import { CallToAction } from "@/components/services/CallToAction";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Your Trusted Partner for Digital Transformation Solutions',
-  description: 'As a trusted partner for your digital journey, we use cutting-edge technology to craft scalable and transformational digital solutions for your brand.',
-  keywords: 'digital transformation, technology solutions, digital solutions, scalable solutions, brand transformation',
+  title: 'About Us | Digital Marketing Agency India | Founder Story | Askyline',
+  description: 'Founder-led digital marketing agency helping 50+ Indian businesses grow online. Transparent, results-focused, startup-friendly. Learn our story and why we\'re different.',
+  keywords: 'digital marketing agency Bangalore, best SEO company India, startup-friendly digital agency, transparent digital marketing, results-focused marketing agency',
   metadataBase: new URL('https://askylinedigital.com'),
   icons: {
     icon: '/favicon.ico',
   },
   openGraph: {
-    title: 'Your Trusted Partner for Digital Transformation Solutions',
-    description: 'As a trusted partner for your digital journey, we use cutting-edge technology to craft scalable and transformational digital solutions for your brand.',
+    title: 'About Us | Digital Marketing Agency India | Founder Story | Askyline',
+    description: 'Founder-led digital marketing agency helping 50+ Indian businesses grow online. Transparent, results-focused, startup-friendly. Learn our story.',
     url: 'https://askylinedigital.com/about',
     siteName: 'Askylinedigital',
   },

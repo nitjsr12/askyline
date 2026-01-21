@@ -112,17 +112,17 @@ export default async function BlogPostPage(
             </div>
             <h1 className="text-4xl lg:text-5xl font-bold mb-6">{post.title}</h1>
 
-            <div className="flex items-center gap-3 mt-6">
+              <div className="flex items-center gap-3 mt-6">
               {post.author.avatar && (
-                <Image
+                   <Image
                   src={post.author.avatar}
                   alt={post.author.name}
-                  className="w-10 h-10 rounded-full object-cover"
-                  width={40}
-                  height={40}
-                />
-              )}
-              <div>
+                      className="w-10 h-10 rounded-full object-cover"
+                      width={40}
+                      height={40}
+                   />
+                )}
+                <div>
                 <p className="font-medium">{post.author.name}</p>
                 <p className="text-sm text-gray-400">{post.author.email}</p>
               </div>
@@ -170,14 +170,14 @@ export default async function BlogPostPage(
                 >
                   <div className="flex gap-4 items-center">
                     <div className="w-20 h-20 bg-gray-700 rounded-md overflow-hidden flex-shrink-0">
-                      <Image
+                        <Image
                         src={latestPost.image}
                         alt={latestPost.title}
-                        className="object-cover w-full h-full"
-                        width={80}
-                        height={80}
-                        loading="lazy"
-                      />
+                          className="object-cover w-full h-full"
+                          width={80}
+                          height={80}
+                          loading="lazy"
+                        />
                     </div>
                     <div>
                       <h4 className="font-medium group-hover:text-blue-400 transition line-clamp-2">

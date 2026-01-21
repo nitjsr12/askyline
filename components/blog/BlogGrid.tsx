@@ -22,7 +22,7 @@ interface BlogGridProps {
 
 export function BlogGrid({ posts }: BlogGridProps) {
   return (
-    <section className="relative py-24 bg-gray-900 overflow-hidden" >
+    <section className="relative py-20 bg-gray-900 overflow-hidden" >
       {/* Background elements (keep your existing background code) */}
       
       <div className="container mx-auto px-6" id="blog">

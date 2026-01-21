@@ -76,30 +76,30 @@ export default function AboutUs() {
           const targetX = particle.x + (Math.sin(i) * 20);
           const targetY = particle.y + (Math.cos(i) * 20);
           return (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 rounded-full bg-purple-400"
-              initial={{
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 rounded-full bg-purple-400"
+            initial={{
                 x: particle.x,
                 y: particle.y,
-                opacity: 0
-              }}
-              animate={{
+              opacity: 0
+            }}
+            animate={{
                 x: [particle.x, targetX, particle.x],
                 y: [particle.y, targetY, particle.y],
-                opacity: [0, 0.5, 0],
-              }}
-              transition={{
+              opacity: [0, 0.5, 0],
+            }}
+            transition={{
                 duration: particle.duration,
-                repeat: Infinity,
+              repeat: Infinity,
                 repeatType: "reverse",
                 ease: "easeInOut"
-              }}
-              style={{
+            }}
+            style={{
                 left: `${particle.left}%`,
                 top: `${particle.top}%`,
-              }}
-            />
+            }}
+          />
           );
         })}
       </div>
@@ -130,7 +130,7 @@ export default function AboutUs() {
             transition={{ delay: 0.3 }}
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500">
-            Who We Are
+            Who We Are: A Tech Agency That Actually Gets Indian Businesses
             </span>
           </motion.h1>
 
@@ -140,7 +140,7 @@ export default function AboutUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-           Askyline Digital is a tech-based digital marketing agency in Bangalore with a core belief: technology is the backbone of every great brand in the digital age. We’re not just marketers, we’re builders, developers, and problem-solvers who use technology to craft meaningful, scalable solutions for startups and growing businesses.
+           We're not just marketers. We're builders who use technology to solve real business problems. Every solution we deliver is designed to bring you more customers – not just more traffic.
           </motion.p>
           <motion.p
             className="text-lg text-gray-300 leading-relaxed"
@@ -148,7 +148,7 @@ export default function AboutUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-           From high-performance websites to robust mobile applications and data-driven marketing ecosystems, we design and develop systems that are built to adapt and evolve. Every solution we deliver is grounded in technology and tailored to your business goals—because we know that true growth happens when strategy meets smart execution.
+           Askyline Digital is a tech-based digital marketing agency in Bangalore. We believe technology is the backbone of every great brand in the digital age. We're builders, developers, and problem-solvers who use technology to craft meaningful, scalable solutions for startups and growing businesses.
           </motion.p>
           <motion.p
             className="text-lg text-gray-300 leading-relaxed"
@@ -156,7 +156,7 @@ export default function AboutUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            Recognized as one of the top digital marketing agencies in Bangalore, we go beyond surface-level campaigns. As a digital solutions company in Bangalore, we combine deep technical expertise with creative insight to help brands move faster, operate smarter, and connect better with their audience.
+            From high-performance websites to robust mobile apps and data-driven marketing, we design systems built to adapt and evolve. Every solution is grounded in technology and tailored to your business goals—because we know that true growth happens when strategy meets smart execution.
           </motion.p>
           <motion.p
             className="text-lg text-gray-300 leading-relaxed"
@@ -164,7 +164,7 @@ export default function AboutUs() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
           >
-            At Askyline, we stay grounded in our values: transparency, collaboration, and simplicity, while elevating your brand through future-ready digital solutions. Whether you're a startup looking for a strong tech foundation or a growing business seeking a reliable digital partner, we're here to build what matters.
+            Recognized as one of the top digital marketing agencies in Bangalore, we go beyond surface-level campaigns. As a digital solutions company, we combine deep technical expertise with creative insight to help brands move faster, operate smarter, and connect better with their audience. We stay grounded in our values: transparency, collaboration, and simplicity.
           </motion.p>
 
           {/* Stats Grid */}
@@ -215,12 +215,27 @@ export default function AboutUs() {
                 </div>
                 <div>
                   <p className="text-2xl font-bold">6+</p>
-                  <p className="text-sm text-gray-400">Years of Industry Experiencee</p>
+                  <p className="text-sm text-gray-400">Years of Experience</p>
                 </div>
               </div>
             </motion.div>
           </motion.div>
 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="pt-6"
+          >
+            <motion.a
+              href="/contact"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold shadow-lg hover:shadow-xl transition-all"
+            >
+              Want to join them? Get your Free Growth Audit →
+            </motion.a>
+          </motion.div>
         </motion.div>
 
         {/* Image Section */}

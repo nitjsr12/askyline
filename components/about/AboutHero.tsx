@@ -34,16 +34,16 @@ export function AboutHero() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            Our Story
+            From a Side Hustle to Helping 50+ Businesses Grow Online
           </motion.h1>
           
           <motion.p
-            className="text-lg md:text-xl mb-8 leading-relaxed"
+            className="text-lg md:text-xl mb-8 leading-relaxed max-w-3xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            Founded in 2015, we&apos;ve grown from a small team of passionate developers to a full-service digital agency helping businesses worldwide transform their ideas into reality.
+            I started Askyline Digital while working a full-time job. Today, we help Indian SMEs and startups get more customers through smart digital marketing. Here's our story – and why we're different from other agencies.
           </motion.p>
           <motion.div
             initial={{ opacity: 0 }}

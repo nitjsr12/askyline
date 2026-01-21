@@ -6,28 +6,28 @@ import { useRef } from "react";
 
 const features = [
   {
+    title: "We're Indian, We Get It",
+    description: "We understand local markets, customer behavior, and pricing expectations. No fancy jargon – just results that matter to your business.",
+  },
+  {
+    title: "Founder-Led & Personal",
+    description: "Not a big agency where you're just a number. Direct access to decision-maker, faster responses, real accountability. I started this while working a full-time job, so I know what it's like to build a business.",
+  },
+  {
+    title: "Results-Focused, Not Feature-Focused",
+    description: "We care about YOUR revenue, not our portfolio. Every solution is built to solve your specific business problem.",
+  },
+  {
+    title: "Transparent Pricing & Process",
+    description: "No hidden costs, no surprises. Clear timelines and regular updates throughout the project. Startup-friendly pricing available.",
+  },
+  {
+    title: "Startup-Friendly Pricing",
+    description: "We offer competitive rates because we're building relationships, not just projects. Payment plans available for growing businesses.",
+  },
+  {
     title: "We Listen First",
-    description: "Every project begins with understanding your vision, your goals, and the real challenges you're facing. We ask the right questions, and we pay attention to the details that matter.",
-  },
-  {
-    title: "We Keep It Simple and Honest",
-    description: "No fancy buzzwords, no overcomplication. Just clear, thoughtful solutions built to solve real problems.",
-  },
-  {
-    title: "We Build With Intention",
-    description: "Everything we design or develop has a reason behind it — whether it's the user flow of your app, or the structure of your SEO strategy. Nothing is random.",
-  },
-  {
-    title: "We Care Like It's Our Own",
-    description: "We genuinely care about the businesses we work with. Your growth feels personal to us, and we put our heart into helping you get there.",
-  },
-  {
-    title: "We Deliver Without the Drama",
-    description: "Clean processes. Transparent communication. Deadlines that are respected. Working with us is smooth, and stays that way.",
-  },
-  {
-    title: "We Stay Curious",
-    description: "Tech moves fast, and so do we. We're constantly exploring new tools, platforms, and ideas — not for the sake of trends, but to find what works better for you.",
+    description: "Every project begins with understanding your business, your goals, and the real challenges you're facing. We ask the right questions.",
   },
 ];
 
@@ -55,7 +55,7 @@ export function WhyChooseUs() {
   };
 
   return (
-    <section className="py-20 bg-gray-900 text-white">
+    <section className="py-16 bg-gray-900 text-white">
       <div className="container mx-auto px-6">
         {/* Section Heading */}
         <motion.div
@@ -66,10 +66,10 @@ export function WhyChooseUs() {
           className="text-center max-w-2xl mx-auto mb-16"
         >
           <h2 className="text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-blue-500">
-            Why Work With Us
+            Why Indian Business Owners Trust Us
           </h2>
           <p className="text-gray-300 text-lg">
-            We don&apos;t overpromise. We simply stay committed to doing the work right — with intention, clarity, and care. Here&apos;s how we approach every project:
+            We don&apos;t overpromise. We simply stay committed to helping your business grow — with results, transparency, and care. Here&apos;s why you can trust us:
           </p>
         </motion.div>
 

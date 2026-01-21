@@ -36,9 +36,28 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Prevent background scroll when mobile menu is open
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const body = document.body;
+
+    if (mobileMenuOpen && window.innerWidth < 768) {
+      const previousOverflow = body.style.overflow;
+      const previousTouchAction = body.style.touchAction;
+      body.style.overflow = "hidden";
+      body.style.touchAction = "none";
+
+      return () => {
+        body.style.overflow = previousOverflow;
+        body.style.touchAction = previousTouchAction;
+      };
+    }
+  }, [mobileMenuOpen]);
+
   return (
     <motion.header 
-      className={`fixed w-full text-white shadow-lg z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full text-white shadow-lg z-50 transition-all duration-300 ${
         scrolled 
           ? "bg-gray-900/95 backdrop-blur-md shadow-xl" 
           : "bg-gradient-to-b from-gray-900 to-gray-800"
@@ -54,13 +73,13 @@ export function Header() {
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-            >
+          >
               <Image 
                 src="/images/askyline.png" 
                 alt="Logo" 
                 width={200} 
                 height={50}
-                className="transition-opacity group-hover:opacity-80"
+                className="transition-opacity group-hover:opacity-80 w-32 sm:w-40 md:w-48 h-auto"
               />
             </motion.div>
           </Link>
@@ -78,7 +97,7 @@ export function Header() {
                 {item.submenu ? (
                   <>
                     <motion.button 
-                      className="flex items-center gap-1 text-gray-300 hover:text-white font-medium transition duration-200 relative"
+                      className="flex items-center gap-1 text-sm sm:text-base text-gray-300 hover:text-white font-medium transition duration-200 relative"
                       onClick={() => setServicesOpen(!servicesOpen)}
                       whileHover={{ scale: 1.05 }}
                     >
@@ -87,7 +106,7 @@ export function Header() {
                         animate={{ rotate: servicesOpen ? 180 : 0 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <ChevronDown className="w-4 h-4" />
+                        <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4" />
                       </motion.div>
                       <motion.div
                         className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-purple-500 to-blue-500"
@@ -97,7 +116,7 @@ export function Header() {
                       />
                     </motion.button>
                     <AnimatePresence>
-                      {servicesOpen && (
+                    {servicesOpen && (
                         <motion.div
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -112,23 +131,23 @@ export function Header() {
                               animate={{ opacity: 1, x: 0 }}
                               transition={{ delay: subIndex * 0.05 }}
                             >
-                              <Link
-                                href={subItem.href}
+                          <Link
+                            href={subItem.href}
                                 className="block px-4 py-2 text-gray-300 hover:bg-gradient-to-r hover:from-purple-500/20 hover:to-blue-500/20 hover:text-white transition-all duration-200"
                                 onClick={() => setServicesOpen(false)}
-                              >
-                                {subItem.name}
-                              </Link>
+                          >
+                            {subItem.name}
+                          </Link>
                             </motion.div>
-                          ))}
+                        ))}
                         </motion.div>
-                      )}
+                    )}
                     </AnimatePresence>
                   </>
                 ) : (
                   <Link
                     href={item.href}
-                    className="text-gray-300 hover:text-white font-medium transition duration-200 relative group"
+                    className="text-sm sm:text-base text-gray-300 hover:text-white font-medium transition duration-200 relative group"
                   >
                     {item.name}
                     <motion.div
@@ -145,22 +164,26 @@ export function Header() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link
-                href="/contact"
-                className="px-6 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
-              >
+            <Link
+              href="/contact"
+                className="px-4 sm:px-6 py-2 text-xs sm:text-sm md:text-base bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 relative overflow-hidden group"
+            >
                 <span className="relative z-10">Contact Us</span>
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 />
-              </Link>
+            </Link>
             </motion.div>
           </div>
 
           {/* Mobile Menu Button */}
           <motion.button
             className="md:hidden text-gray-300 hover:text-white"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            onClick={() => {
+              // When opening mobile menu, always reset services dropdown state
+              setServicesOpen(false);
+              setMobileMenuOpen((open) => !open);
+            }}
             aria-label="Toggle navigation menu"
             whileTap={{ scale: 0.9 }}
           >
@@ -192,7 +215,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         <AnimatePresence>
-          {mobileMenuOpen && (
+        {mobileMenuOpen && (
             <>
               <motion.div
                 initial={{ opacity: 0 }}
@@ -207,19 +230,19 @@ export function Header() {
                 exit={{ x: "100%" }}
                 transition={{ type: "spring", damping: 25, stiffness: 200 }}
                 className="fixed top-0 right-0 w-3/4 max-w-sm h-full bg-gradient-to-b from-gray-900 to-gray-800 text-gray-300 shadow-2xl z-50 md:hidden"
-                onClick={(e) => e.stopPropagation()}
-              >
+              onClick={(e) => e.stopPropagation()}
+            >
                 <div className="flex justify-end p-4 border-b border-gray-700">
                   <motion.button
-                    className="text-white"
-                    onClick={() => setMobileMenuOpen(false)}
-                    aria-label="Close menu"
+                  className="text-white"
+                  onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close menu"
                     whileTap={{ scale: 0.9 }}
-                  >
-                    <X className="h-8 w-8" />
+                >
+                  <X className="h-8 w-8" />
                   </motion.button>
-                </div>
-                <div className="flex flex-col gap-6 px-6 py-8 overflow-y-auto h-[calc(100%-80px)]">
+              </div>
+                <div className="flex flex-col gap-6 px-6 py-8 bg-[#1b2433] h-[calc(100%-80px)]">
                   {navigation.map((item, index) => (
                     <motion.div
                       key={item.name}
@@ -227,14 +250,14 @@ export function Header() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
                     >
-                      {item.submenu ? (
-                        <div className="space-y-2">
+                    {item.submenu ? (
+                      <div className="space-y-2">
                           <motion.button
-                            className="flex items-center gap-2 text-lg font-medium hover:text-purple-400 transition duration-200 w-full"
-                            onClick={() => setServicesOpen(!servicesOpen)}
+                            className="flex items-center gap-2 text-base sm:text-lg font-medium hover:text-purple-400 transition duration-200 w-full"
+                          onClick={() => setServicesOpen(!servicesOpen)}
                             whileTap={{ scale: 0.98 }}
-                          >
-                            {item.name}
+                        >
+                          {item.name}
                             <motion.div
                               animate={{ rotate: servicesOpen ? 180 : 0 }}
                               transition={{ duration: 0.3 }}
@@ -243,7 +266,7 @@ export function Header() {
                             </motion.div>
                           </motion.button>
                           <AnimatePresence>
-                            {servicesOpen && (
+                        {servicesOpen && (
                               <motion.div
                                 initial={{ height: 0, opacity: 0 }}
                                 animate={{ height: "auto", opacity: 1 }}
@@ -258,48 +281,48 @@ export function Header() {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: subIndex * 0.05 }}
                                   >
-                                    <Link
-                                      href={subItem.href}
+                              <Link
+                                href={subItem.href}
                                       className="block text-gray-400 hover:text-purple-400 transition-colors"
-                                      onClick={() => setMobileMenuOpen(false)}
-                                    >
-                                      {subItem.name}
-                                    </Link>
+                                onClick={() => setMobileMenuOpen(false)}
+                              >
+                                {subItem.name}
+                              </Link>
                                   </motion.div>
-                                ))}
+                            ))}
                               </motion.div>
-                            )}
+                        )}
                           </AnimatePresence>
-                        </div>
-                      ) : (
-                        <Link
-                          href={item.href}
-                          className="block text-lg font-medium hover:text-purple-400 transition duration-200"
-                          onClick={() => setMobileMenuOpen(false)}
-                        >
-                          {item.name}
-                        </Link>
-                      )}
+                      </div>
+                    ) : (
+                      <Link
+                        href={item.href}
+                          className="block text-base sm:text-lg font-medium hover:text-purple-400 transition duration-200"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    )}
                     </motion.div>
-                  ))}
+                ))}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: navigation.length * 0.1 }}
                     className="pt-4"
                   >
-                    <Link
-                      href="/contact"
-                      className="block px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg text-center shadow-lg hover:shadow-xl transition-all"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      Get in Touch
-                    </Link>
+                <Link
+                  href="/contact"
+                      className="block px-4 py-3 text-sm sm:text-base bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg text-center shadow-lg hover:shadow-xl transition-all"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Get in Touch
+                </Link>
                   </motion.div>
-                </div>
+              </div>
               </motion.div>
             </>
-          )}
+        )}
         </AnimatePresence>
       </nav>
     </motion.header>

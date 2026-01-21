@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export function ServiceHero() {
   return (
-    <section className="relative w-full h-[70vh] min-h-[500px] mt-[-10px] flex items-center justify-center overflow-hidden">
+    <section className="relative w-full min-h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden pt-24 md:pt-28">
       {/* Background Image with overlay */}
       <div className="absolute inset-0 z-0">
         <Image
@@ -29,21 +29,21 @@ export function ServiceHero() {
           className="max-w-3xl mx-auto"
         >
           <motion.h1
-            className="text-4xl font-bold md:text-5xl lg:text-6xl mb-6"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-           Our Services
+           Digital Marketing Services That Bring You More Customers
           </motion.h1>
           
           <motion.p
-            className="text-lg md:text-xl mb-8 leading-relaxed"
+            className="text-base sm:text-lg md:text-xl mb-8 leading-relaxed max-w-3xl mx-auto"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            Explore our range of cutting-edge digital services designed to help your business thrive in the modern world.
+            Every service is designed to solve a specific business problem. Clear outcomes, transparent pricing, results-focused approach. Starting with a Free Growth Audit to understand your needs.
           </motion.p>
           
           <motion.div

@@ -4,7 +4,7 @@ import { getComments, createComment } from '@/lib/blog';
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
   const postId = searchParams.get('post');
-  
+
   if (!postId) {
     return NextResponse.json({ error: 'Missing post ID' }, { status: 400 });
   }
@@ -30,21 +30,21 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
-    const { postId, name, email, content } = await request.json();
+  const { postId, name, email, content } = await request.json();
     
-    if (!postId || !name || !email || !content) {
-      return NextResponse.json(
-        { error: 'postId, name, email and content are required' },
-        { status: 400 }
-      );
-    }
+  if (!postId || !name || !email || !content) {
+    return NextResponse.json(
+      { error: 'postId, name, email and content are required' },
+      { status: 400 }
+    );
+  }
 
     const comment = await createComment({
       postId: parseInt(postId),
       author_name: name,
       author_email: email,
       content,
-    });
+  });
 
     // Return in the expected format
     return NextResponse.json({

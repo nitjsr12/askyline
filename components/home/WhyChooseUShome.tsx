@@ -67,7 +67,7 @@ export function WhyChooseUsHome() {
   ];
 
   return (
-    <section className="py-20 bg-gray-900">
+    <section className="py-16 bg-gray-900">
       <div className="container mx-auto px-6">
         <motion.div
           ref={ref}

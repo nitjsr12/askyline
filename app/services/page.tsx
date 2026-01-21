@@ -6,13 +6,12 @@ import { ServiceHero } from "@/components/services/ServiceHero";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Comprehensive Digital Services - Your Partner in Growth',
-  description: `As a leading digital services provider, we offer a comprehensive suite of solutions to elevate your brand's online presence and drive growth.
-  Our services include web development, app development, SEO, and digital marketing, tailored to meet your unique business needs.`,
-  keywords: 'digital services, web development, app development, SEO, digital marketing, online presence, brand growth, comprehensive solutions',
+  title: 'Digital Marketing Services India | Website, SEO, Ads | Askyline',
+  description: 'Professional digital marketing services for Indian SMEs. Website development (₹50K+), SEO (₹15K/mo), Google Ads, complete marketing. Free Growth Audit. Transparent pricing.',
+  keywords: 'website development company India, SEO services India, Google Ads management India, digital marketing agency Bangalore, lead generation services, e-commerce development India',
   openGraph: {
-    title: 'Comprehensive Digital Services - Your Partner in Growth',
-    description: 'As a leading digital services provider, we offer a comprehensive suite of solutions to elevate your brand\'s online presence and drive growth.',
+    title: 'Digital Marketing Services India | Website, SEO, Ads | Askyline',
+    description: 'Professional digital marketing services for Indian SMEs. Website development (₹50K+), SEO (₹15K/mo), Google Ads, complete marketing. Free Growth Audit.',
     url: 'https://askylinedigital.com/services',
     siteName: 'Askylinedigital',
   },

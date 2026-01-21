@@ -1,11 +1,11 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Phone, Mail } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 
 export function CallToAction() {
   return (
-    <section className="relative py-24 overflow-hidden bg-gray-900">
+    <section className="relative py-20 overflow-hidden bg-gray-900">
       {/* Background elements */}
       <div className="absolute inset-0 -z-10">
         {/* Gradient mesh */}
@@ -63,10 +63,10 @@ export function CallToAction() {
             transition={{ delay: 0.4 }}
           >
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-              Ready to Transform
+              Ready to Get More Leads
             </span>
             <br />
-            <span className="text-white">Your Digital Presence?</span>
+            <span className="text-white">for Your Business?</span>
           </motion.h2>
 
           <motion.p
@@ -75,7 +75,7 @@ export function CallToAction() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            Partner with our team of experts to create innovative solutions that drive real business results.
+            Every successful business started with a single step. Yours can start with a <strong className="text-purple-400">Free 30-Minute Growth Audit</strong>. No sales pitch, just honest feedback on how to get more customers online.
           </motion.p>
 
           <motion.div
@@ -88,20 +88,24 @@ export function CallToAction() {
               href="/contact"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 px-8 py-4 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold shadow-lg hover:shadow-blue-500/30 transition-all"
+              className="flex items-center gap-2 px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-xs sm:text-sm md:text-base rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold shadow-lg hover:shadow-blue-500/30 transition-all"
             >
-              <span>Get Started</span>
-              <ArrowRight className="w-5 h-5" />
+              <span className="hidden sm:inline">Get Free Growth Audit</span>
+              <span className="sm:hidden">Free Audit</span>
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </motion.a>
 
             <motion.a
-              href="mailto:contact@askylinedigital.com"
+              href="https://wa.me/917256889395?text=Hi,%20I%27m%20interested%20in%20your%20Free%20Growth%20Audit"
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
-              className="flex items-center gap-2 px-8 py-4 rounded-lg bg-gray-800 border border-gray-700 text-white font-semibold shadow-lg hover:bg-gray-700/50 transition-all"
+              className="flex items-center gap-2 px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-xs sm:text-sm md:text-base rounded-lg bg-gray-800 border-2 border-green-500/50 hover:border-green-500 text-white font-semibold shadow-lg hover:bg-gray-700/50 transition-all"
             >
-              <Mail className="w-5 h-5" />
-              <span>Email Us</span>
+              <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
+              <span className="hidden sm:inline">Chat on WhatsApp</span>
+              <span className="sm:hidden">WhatsApp</span>
             </motion.a>
           </motion.div>
         </motion.div>
@@ -109,15 +113,18 @@ export function CallToAction() {
 
       {/* Floating contact info */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400 text-sm"
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-gray-400 text-sm text-center"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}
       >
-        <span>Or call us directly: </span>
-        <a href="tel:+917256889395" className="text-blue-400 hover:text-blue-300 transition-colors">
-          +91 7256889395
-        </a>
+        <p>We respond within 24 hours. No spam, no pushy sales calls.</p>
+        <p className="mt-1">
+          <span>Call: </span>
+          <a href="tel:+917256889395" className="text-blue-400 hover:text-blue-300 transition-colors">
+            +91 7256889395
+          </a>
+        </p>
       </motion.div>
     </section>
   );

@@ -127,7 +127,7 @@ export function ServiceDetails() {
   const [expandedService, setExpandedService] = useState<number | null>(null);
 
   return (
-    <section className="relative py-24 bg-gray-900 overflow-hidden">
+    <section className="relative py-20 bg-gray-900 overflow-hidden">
       {/* Background elements */}
       <div className="absolute inset-0 -z-10" id="services">
         <div className="absolute top-0 left-0 w-full h-1/3 bg-gradient-to-b from-gray-800 to-transparent opacity-50" />
@@ -285,7 +285,7 @@ export function ServiceDetails() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center max-w-3xl mx-auto mb-16"
+          className="text-center max-w-3xl mx-auto mb-12"
         >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-800 text-blue-400 mb-6">
             <Package className="w-5 h-5" />

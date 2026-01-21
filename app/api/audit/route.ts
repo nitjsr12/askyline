@@ -64,12 +64,12 @@ async function runPsiAnalysis(url: string) {
       next: { revalidate: 0 }, // Don't cache
     });
     
-    if (!response.ok) {
+  if (!response.ok) {
       const error = await response.json().catch(() => ({ error: { message: 'Unknown error' } }));
       throw new Error(`PageSpeed API Error: ${error.error?.message || 'Failed to fetch data'}`);
-    }
+  }
     
-    return response.json();
+  return response.json();
   } catch (error: any) {
     if (error.message.includes('API')) {
       throw error;

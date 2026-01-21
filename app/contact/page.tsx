@@ -5,12 +5,12 @@ import { FAQS } from "@/components/contact/FaqSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Contact Us - Top Digital Transformation Company in India',  
-  description: `Get in touch with us for all your digital transformation needs. We are here to help you with web development, app development, and digital marketing solutions.`,
-  keywords: 'contact us, digital transformation, web development, app development, digital marketing, customer support, inquiries, business solutions',
+  title: 'Contact Us | Free Growth Audit | Digital Marketing Agency India',
+  description: 'Get your Free 30-Minute Growth Audit. Fast response (24 hours). WhatsApp chat available. Transparent pricing. No spam. Digital marketing agency India.',
+  keywords: 'contact digital marketing agency, free website audit India, digital marketing consultation, get quote for SEO services',
   openGraph: {
-    title: 'Contact Us - Top Digital Transformation Company in India',
-    description: 'Get in touch with us for all your digital transformation needs. We are here to help you with web development, app development, and digital marketing solutions.',
+    title: 'Contact Us | Free Growth Audit | Digital Marketing Agency India',
+    description: 'Get your Free 30-Minute Growth Audit. Fast response (24 hours). WhatsApp chat available. Transparent pricing. No spam.',
     url: 'https://askylinedigital.com/contact',
     siteName: 'Askylinedigital',  
   }
